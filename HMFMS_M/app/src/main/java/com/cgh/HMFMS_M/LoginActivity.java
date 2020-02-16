@@ -2,41 +2,39 @@ package com.cgh.HMFMS_M;
 
 import android.app.Activity;
 import android.content.Intent;
-
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-//import com.google.firebase.iid.FirebaseInstanceId;
-
-import java.util.HashMap;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-/*import cathay.hospital.smartpatrol.R;
+
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import java.util.HashMap;
+
+import cathay.hospital.smartpatrol.model.SharedPreferencesModel;
 import cathay.hospital.smartpatrol.model.bean.LoginData;
 import cathay.hospital.smartpatrol.util.UpdateManager;
 import cathay.hospital.smartpatrol.util.UtilCommonVariable;
 import cathay.hospital.smartpatrol.util.UtilTools;
 import cathay.hospital.smartpatrol.viewModel.ViewModel_login;
-import cathay.hospital.smartpatrol.model.SharedPreferencesModel;*/
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     EditText editUser,editPassword;
     TextView textError;
     Button btnLogin,btnRefresh;
     String empNo,password,divNo,deviceToken;
-    //ViewModel_login viewModel_login;
-    //SharedPreferencesModel sharedPrefsModel;
-    //UpdateManager updateManager;
+    ViewModel_login viewModel_login;
+    SharedPreferencesModel sharedPrefsModel;
+    UpdateManager updateManager;
     boolean isUpdate = false;
 
     @Override
@@ -66,7 +64,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void init(){
-       // divNo = UtilCommonVariable.connectEnv;
+        divNo = UtilCommonVariable.connectEnv;
         editUser = findViewById(R.id.editUser);
         editPassword = findViewById(R.id.editPassword);
         textError = findViewById(R.id.textError);
@@ -88,7 +86,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this, instanceIdResult -> {
                 deviceToken = instanceIdResult.getToken();
                 loginMember();
-                //getPreferences(Context.MODE_PRIVATE).edit().putString("fb", newToken).apply();
+                getPreferences(Context.MODE_PRIVATE).edit().putString("fb", newToken).apply();
             });
         }else if(v == btnRefresh){
             editUser.setText("");
@@ -107,7 +105,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 sharedMap.put("divNo",divNo);
                 sharedMap.put("deviceToken", deviceToken);
                 sharedPrefsModel.setSharedPrefsData(sharedMap);
-                UtilTools.goActivity(this,MainActivity.class);
+                UtilTools.goActivity(this, MainActivity.class);
                 break;
             case "E65409": case "272332":
                 sharedMap.put("empNo", empNo);
@@ -115,7 +113,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 sharedMap.put("deviceToken", deviceToken);
                 sharedPrefsModel.setSharedPrefsData(sharedMap);
 
-                UtilTools.goActivity(this,MainActivity.class);
+                UtilTools.goActivity(this, MainActivity.class);
                 break;
             default:
                 HashMap<String,String> paramsMap = new HashMap<>();
@@ -138,7 +136,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             sharedMap.put("deviceToken", deviceToken);
                             sharedPrefsModel.setSharedPrefsData(sharedMap);
 
-                            UtilTools.goActivity(this,MainActivity.class);
+                            UtilTools.goActivity(this, MainActivity.class);
                         }else{
                             textError.setText(R.string.loginError);
                         }
