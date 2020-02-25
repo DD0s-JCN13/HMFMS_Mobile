@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name='行動化消防管理系統'
+rootProject.name='CathayExample'

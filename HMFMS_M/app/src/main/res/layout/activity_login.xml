@@ -117,18 +117,18 @@
             android:id="@+id/btnLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:background="@android:drawable/btn_default"
             android:radius="5dip"
-            android:text="@string/login"
             android:textColor="#ffffff"
-            android:textSize="16sp" />
+            android:layout_marginEnd="10dp"
+            android:text="@string/login"
+            android:textSize="16sp"
+            android:background="@drawable/button_login"/>
 
         <Button
             android:id="@+id/btnRefresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:drawable/btn_default"
+            android:background="@drawable/button_refresh"
             android:radius="5dip"
             android:text="@string/refresh"
             android:textColor="#000000"

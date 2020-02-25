@@ -1,6 +1,7 @@
-package com.cgh.HMFMS_M;
+package cathay.hospital.example.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import cathay.hospital.example.R;
 
 import android.os.Bundle;
 

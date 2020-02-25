@@ -1,4 +1,4 @@
-package com.cgh.HMFMS_M;
+package cathay.hospital.example;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.cgh.HMFMS_M", appContext.getPackageName());
+        assertEquals("cathay.hospital.smartdevice", appContext.getPackageName());
     }
 }

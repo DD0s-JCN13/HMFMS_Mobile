@@ -1,4 +1,4 @@
-package com.cgh.HMFMS_M;
+package cathay.hospital.example;
 
 import org.junit.Test;
 
