@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import cathay.hospital.example.R;
 import cathay.hospital.example.model.SharedPreferencesModel;
 import cathay.hospital.example.model.bean.LoginData;
+import cathay.hospital.example.util.AES;
 import cathay.hospital.example.util.UtilCommonVariable;
 import cathay.hospital.example.util.UtilTools;
 import cathay.hospital.example.viewModel.ViewModel_login;
@@ -21,7 +22,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     EditText editUser,editPassword;
     TextView textError;
     Button btnLogin,btnRefresh;
-    String empNo,password,divNo;
+    String userNo,password,divNo;
     ViewModel_login viewModel_login;
     SharedPreferencesModel sharedPrefsModel;
     private final String TAG = getClass().getSimpleName();
@@ -50,7 +51,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public void onClick(View v) {
         if(v == btnLogin){
-            empNo = editUser.getText().toString();
+            userNo = editUser.getText().toString();
             password = editPassword.getText().toString();
             loginMember();
         }else if(v == btnRefresh){
@@ -63,19 +64,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public void loginMember(){
         HashMap<String,String> sharedMap = new HashMap<>();
-        switch(empNo){
+        switch(userNo){
             case "123456":
-                sharedMap.put("empNo", empNo);
+                sharedMap.put("userNo", userNo);
                 sharedMap.put("divNo",divNo);
                 sharedPrefsModel.setSharedPrefsData(sharedMap);
-
 
                 UtilTools.goActivity(this,MainActivity.class);
                 break;
             default:
                 HashMap<String,String> paramsMap = new HashMap<>();
-                paramsMap.put("nickname",empNo);
-                paramsMap.put("passwd",password);
+                paramsMap.put("userNo",userNo);
+                paramsMap.put("password",AES.encrypt(password));
                 paramsMap.put("divno",divNo);
 
                 viewModel_login = new ViewModel_login(divNo,paramsMap);
@@ -85,14 +85,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         textError.setText(R.string.connectError);
                     } else {
                         LoginData loginData = (LoginData)dataModel.getDataObj();
-                        if(loginData.status.equals("1")){
+                        if(loginData.getStatus().equals("1")){
                             sharedMap.put("divNo",divNo);
-                            sharedMap.put("empNo", empNo);
-                            sharedMap.put("empName", loginData.getName());
-                            sharedMap.put("costNo", loginData.getCostNo());
+                            sharedMap.put("userNo", userNo);
+                            sharedMap.put("userName", loginData.getUserName());
                             sharedPrefsModel.setSharedPrefsData(sharedMap);
 
-                            Log.i(TAG,"costNo="+loginData.getCostNo());
                             UtilTools.goActivity(this,MainActivity.class);
                         }else{
                             textError.setText(R.string.loginError);

@@ -12,14 +12,14 @@ import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
 
 public interface ApiModule {
-    @GET("mlogin.jsp")
-    Single<LoginData> getLoginData(@QueryMap HashMap<String, String> params);
+//    @GET("member/login")
+//    Single<LoginData> getLoginData(@QueryMap HashMap<String, String> params);
 
     /**
      *  post 範例
      */
     @FormUrlEncoded
-    @POST("patrol/yourApiPath.jsp")
-    Single<ReturnData> getApiPathData(@FieldMap HashMap<String, String> params);
+    @POST("member/login")
+    Single<LoginData> getLoginData(@FieldMap HashMap<String, String> params);
 
 }

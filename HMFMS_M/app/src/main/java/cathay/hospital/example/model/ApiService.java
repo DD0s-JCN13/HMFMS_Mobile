@@ -1,5 +1,7 @@
 package cathay.hospital.example.model;
 
+import android.util.Log;
+
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
@@ -16,11 +18,11 @@ public class ApiService {
     private ApiModule api;
 
     public ApiService(String divno) {
-        String ip = "";
+        String ip = "localhost:8699";
        if(divno.equals("test")){
-           ip = "localhost:9082";
+           ip = "localhost:8699";
        }
-        String BASE_URL = "http://"+ip+"/smartcare/html/pages/mobile/";
+        String BASE_URL = "http://"+ip+"/";
 
         OkHttpClient client = new OkHttpClient.Builder()
                 .retryOnConnectionFailure(false)//true:默认重试一次，若需要重试N次，则要实现拦截器。

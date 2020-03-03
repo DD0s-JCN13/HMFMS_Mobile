@@ -3,22 +3,11 @@ package cathay.hospital.example.model.bean;
 import com.google.gson.annotations.SerializedName;
 
 public class LoginData {
-    @SerializedName("logCostNo")
-    public String costNo;
-
-    @SerializedName("logStatus")
+    @SerializedName("status")
     public String status;
 
-    @SerializedName("logUserCname")
-    public String name;
-
-    public String getCostNo() {
-        return costNo;
-    }
-
-    public void setCostNo(String costNo) {
-        this.costNo = costNo;
-    }
+    @SerializedName("userName")
+    public String userName;
 
     public String getStatus() {
         return status;
@@ -28,11 +17,11 @@ public class LoginData {
         this.status = status;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }
