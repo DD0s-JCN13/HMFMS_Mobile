@@ -7,4 +7,7 @@
     <string name="loginError">帳號或密碼錯誤</string>
     <string name="connectError">沒有網路連線</string>
     <string name="refresh">清除</string>
+    <string name="home">首頁</string>
+    <string name="map">地圖</string>
+    <string name="scanner">QR Code 掃描器</string>
 </resources>
