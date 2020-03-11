@@ -10,4 +10,17 @@
     <string name="home">首頁</string>
     <string name="map">地圖</string>
     <string name="scanner">QR Code 掃描器</string>
+    <string name="navigation_drawer_open">開啟側面選單</string>
+    <string name="navigation_drawer_close">關閉側面選單</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">側面選單資訊</string>
+    <string name="action_settings">設定</string>
+
+    <string name="menu_home">首頁</string>
+    <string name="menu_gallery">瀏覽</string>
+    <string name="menu_slideshow">幻燈片播放</string>
+
+    <string name="home_second">副首頁</string>
+    <string name="title_activity_homepage">行動化消防設備巡檢系統</string>
 </resources>

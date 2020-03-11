@@ -9,7 +9,6 @@
     <string name="home">Home</string>
     <string name="map">Map</string>
     <string name="scanner">QR code scanner</string>
-    <string name="title_activity_main2">Main2Activity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -22,5 +21,6 @@
     <string name="menu_slideshow">Slideshow</string>
 
     <string name="home_second">Home Second</string>
-    <string name="title_activity_homepage">HomepageActivity</string>
+    <string name="title_activity_homepage">HMFMS Mobile</string>
+
 </resources>
