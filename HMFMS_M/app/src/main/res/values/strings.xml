@@ -23,4 +23,11 @@
     <string name="home_second">Home Second</string>
     <string name="title_activity_homepage">HMFMS Mobile</string>
 
+    <string name="option">Options</string>
+    <string name="location_map">Location Map</string>
+    <string name="check_list">Check List</string>
+    <string name="lost_item">Lost Item List</string>
+    <string name="err_location">Error location List</string>
+
+
 </resources>

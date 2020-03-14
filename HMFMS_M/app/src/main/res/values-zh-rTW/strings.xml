@@ -23,4 +23,10 @@
 
     <string name="home_second">副首頁</string>
     <string name="title_activity_homepage">行動化消防設備巡檢系統</string>
+
+    <string name="option">選項</string>
+    <string name="location_map">地點地圖</string>
+    <string name="check_list">巡檢清單</string>
+    <string name="lost_item">遺失清單</string>
+    <string name="err_location">異常地點</string>
 </resources>
