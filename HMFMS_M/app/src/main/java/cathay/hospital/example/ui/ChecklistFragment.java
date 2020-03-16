@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 import cathay.hospital.example.R;
 import cathay.hospital.example.viewModel.SlideshowViewModel;
 
-public class SlideshowFragment extends Fragment {
+public class ChecklistFragment extends Fragment {
 
     private SlideshowViewModel slideshowViewModel;
 
@@ -23,7 +23,7 @@ public class SlideshowFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         slideshowViewModel =
                 ViewModelProviders.of(this).get(SlideshowViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
+        View root = inflater.inflate(R.layout.fragment_checklist, container, false);
         final TextView textView = root.findViewById(R.id.text_slideshow);
         slideshowViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override

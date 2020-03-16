@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 import cathay.hospital.example.R;
 import cathay.hospital.example.viewModel.GalleryViewModel;
 
-public class GalleryFragment extends Fragment {
+public class Loc_mapFragment extends Fragment {
 
     private GalleryViewModel galleryViewModel;
 
@@ -23,7 +23,7 @@ public class GalleryFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         galleryViewModel =
                 ViewModelProviders.of(this).get(GalleryViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_gallery, container, false);
+        View root = inflater.inflate(R.layout.fragment_loc_map, container, false);
         final TextView textView = root.findViewById(R.id.text_gallery);
         galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override

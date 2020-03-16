@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_home_second"
-        android:name="cathay.hospital.example.activity.ui.home.HomeSecondFragment"
+        android:name="cathay.hospital.example.ui.HomeSecondFragment"
         android:label="@string/home_second"
         tools:layout="@layout/fragment_home_second">
         <action
@@ -30,14 +30,24 @@
     </fragment>
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="cathay.hospital.example.ui.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/lost_item"
+        android:name="cathay.hospital.example.ui.Lost_itemFragment"
+        android:label="@string/lost_item"
+        tools:layout="@layout/fragment_lost_item"/>
+    <fragment
+        android:id="@+id/nav_loc_map"
+        android:name="cathay.hospital.example.ui.Loc_mapFragment"
+        android:label="@string/location_map"
+        tools:layout="@layout/fragment_loc_map" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="cathay.hospital.example.ui.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_checklist"
+        android:name="cathay.hospital.example.ui.ChecklistFragment"
+        android:label="@string/check_list"
+        tools:layout="@layout/fragment_checklist" />
+    <fragment
+        android:id="@+id/nav_err_loc"
+        android:name="cathay.hospital.example.ui.err_locFragment"
+        android:label="@string/err_location"
+        tools:layout="@layout/fragment_err_loc"/>
 </navigation>
