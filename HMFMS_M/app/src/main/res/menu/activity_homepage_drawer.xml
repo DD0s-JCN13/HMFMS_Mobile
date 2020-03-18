@@ -9,16 +9,16 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/location_map" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_check_list"
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/check_list" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_lost_item"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/lost_item" />
         <item
             android:id="@+id/nav_err_loc"
-            android:icon="@drawable/abc_vector_test"
-            android:title="@string/err_location"/>
+            android:icon="@android:drawable/ic_dialog_alert"
+            android:title="@string/err_location" />
     </group>
 </menu>
