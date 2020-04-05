@@ -10,19 +10,15 @@
             android:title="@string/menu_home" />
         <item
             android:id="@+id/nav_checklist"
-            android:icon="@mipmap/compass_05"
+            android:icon="@mipmap/single_folded_content"
             android:title="@string/check_list"/>
         <item
             android:id="@+id/nav_errorlocation"
-            android:icon="@mipmap/compass_05"
+            android:icon="@mipmap/ic_highlight_off_24px"
             android:title="@string/err_location"/>
         <item
             android:id="@+id/nav_locationmap"
-            android:icon="@mipmap/compass_05"
+            android:icon="@mipmap/ic_map_48px"
             android:title="@string/location_map"/>
-        <item
-            android:id="@+id/nav_lostitem"
-            android:icon="@mipmap/compass_05"
-            android:title="@string/lost_item"/>
     </group>
 </menu>
