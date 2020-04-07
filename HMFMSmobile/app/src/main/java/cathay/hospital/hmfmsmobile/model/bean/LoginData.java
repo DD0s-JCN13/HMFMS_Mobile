@@ -9,6 +9,9 @@ public class LoginData {
     @SerializedName("userName")
     public String userName;
 
+    @SerializedName("divNo")
+    public String divNo;
+
     public String getStatus() {
         return status;
     }
@@ -24,4 +27,9 @@ public class LoginData {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+    public String getDivNo() { return divNo;}
+
+    public void setDivNo(String divNo) { this.divNo = divNo; }
+
 }
