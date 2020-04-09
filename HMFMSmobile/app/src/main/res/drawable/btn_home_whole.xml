@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="100dp"
+    android:viewportHeight="100"
+    android:viewportWidth="200">
+    <group android:name="main_layout">
+        <path
+            android:name="bg_upper"
+            android:fillColor="#eff2ed"
+            android:pathData="M 0,0 L 200,0 0,100 z"/>
+        <path
+            android:name="bg_lower"
+            android:fillColor="#eff2ed"
+            android:pathData="M 200,0 L 200,100 0,100 z"/>
+        <path
+            android:name="triangle-right-arrow"
+            android:fillColor="#595959"
+            android:pathData="M 187,37 L 194,50 187, 63 z"/>
+    </group>
+    <group android:name="effect_white_in">
+        <path
+            android:name="eff_ff_upper"
+            android:fillColor="#ffffff"
+            android:pathData="M 178,0 L 179,0 178,100 z"/>
+        <path
+            android:name="eff_ff_lower"
+            android:fillColor="#ffffff"
+            android:pathData="M 179,0 L 178,100 179,100 z"/>
+        <path
+            android:name="eff_f9_upper"
+            android:fillColor="#f9fcf7"
+            android:pathData="M 179,0 L 180,0 179,100 z"/>
+        <path
+            android:name="eff_f9_lower"
+            android:fillColor="#f9fcf7"
+            android:pathData="M 180,0 L 179,100 180,100 z"/>
+        <path
+            android:name="eff_f7_upper"
+            android:fillColor="#f7faf5"
+            android:pathData="M 180,0 L 181,0 180,100 z"/>
+        <path
+            android:name="eff_f7_lower"
+            android:fillColor="#f7faf5"
+            android:pathData="M 181,0 L 180,100 181,100 z"/>
+        <path
+            android:name="eff_f4_upper"
+            android:fillColor="#f4f7f2"
+            android:pathData="M 181,0 L 182,0 181,100 z"/>
+        <path
+            android:name="eff_f4_lower"
+            android:fillColor="#f4f7f2"
+            android:pathData="M 182,0 L 181,100 182,100 z"/>
+        <path
+            android:name="eff_f2_upper"
+            android:fillColor="#f2f5f0"
+            android:pathData="M 182,0 L 183,0 182,100 z"/>
+        <path
+            android:name="eff_f2_lower"
+            android:fillColor="#f2f5f0"
+            android:pathData="M 183,0 L 182,100 183,100 z"/>
+    </group>
+
+</vector>
