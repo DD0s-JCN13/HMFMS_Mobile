@@ -26,7 +26,7 @@
     <string name="check_list">Check List</string>
     <string name="lost_item">Lost Item List</string>
     <string name="err_location">Error location List</string>
-    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_home">Homepage</string>
 
 
 </resources>
