@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.drm.DrmStore;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -46,7 +47,7 @@ public class HomepageActivity extends AppCompatActivity {
                 if (id == R.id.nav_home){
                     Toast.makeText(HomepageActivity.this, "Already on this page!!",
                             Toast.LENGTH_SHORT).show();
-                    return false;
+                    return true;
                 }else if (id == R.id.nav_checklist){
                     Toast.makeText(HomepageActivity.this, "Check List direction",
                             Toast.LENGTH_SHORT).show();
@@ -63,6 +64,7 @@ public class HomepageActivity extends AppCompatActivity {
                 return false;
             }
         });
+        navigationView.getMenu().getItem(0).setChecked(true);
     }
 
 }
