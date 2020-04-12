@@ -23,11 +23,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.HomepageActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="@string/title_activity_home"/>
         <activity
-            android:name="cathay.hospital.hmfmsmobile.activity.HomeActivity"
+            android:name=".activity.HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name="cathay.hospital.hmfmsmobile.activity.LoginActivity">
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,8 +38,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="cathay.hospital.hmfmsmobile.activity.MainActivity"
-            android:screenOrientation="portrait"></activity>
+            android:name=".activity.MainActivity"
+            android:screenOrientation="portrait" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

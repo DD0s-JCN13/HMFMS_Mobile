@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_drawer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:openDrawer="start">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_home"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/THEME_color"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/const_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar_home">
+
+            <TextView
+                android:id="@+id/home_usrName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="?attr/actionBarSize"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:textAlignment="viewStart"
+                android:textSize="30sp"
+                app:layout_constraintTop_toTopOf="@+id/const_home"
+                app:layout_constraintLeft_toLeftOf="@id/const_home"
+                app:layout_constraintRight_toRightOf="@id/const_home"/>
+
+            <TextView
+                android:id="@+id/home_divNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textAlignment="viewStart"
+                android:textSize="15sp"
+                app:layout_constraintTop_toBottomOf="@id/home_usrName"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <ImageView
+                android:id="@+id/home_spacer"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:background="#eff2ed"
+                app:layout_constraintTop_toBottomOf="@id/home_divNo"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <TextView
+                android:id="@+id/img_btn_start"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/btn_home_whole"
+                app:layout_constraintTop_toBottomOf="@id/home_spacer"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_nav_home"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="0dp"
+                android:background="#eff2ed"
+                app:itemIconTint="@color/btm_nav_selector"
+                app:itemTextColor="@color/btm_nav_selector"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:menu="@menu/activity_bottom_navigate"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view_home"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:layout_gravity="start"
+        app:itemTextColor="@color/btm_nav_selector"
+        app:itemIconTint="@color/btm_nav_selector"
+        app:headerLayout="@layout/nav_header_home"
+        app:menu="@menu/activity_home_drawer"/>
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

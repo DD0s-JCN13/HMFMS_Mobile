@@ -2,9 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
+
         <item android:id="@+id/action_homeapge"
             android:title="@string/home"
-            android:icon="@mipmap/home_52"/>
+            android:icon="@mipmap/home_52"
+            android:checked="true"/>
         <item android:id="@+id/action_scanner"
             android:title="@string/scanner"
             android:icon="@mipmap/barcode_qr"/>

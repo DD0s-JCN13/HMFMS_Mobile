@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 sharedMap.put("divNo",divNo);
                 sharedPrefsModel.setSharedPrefsData(sharedMap);
 
-                UtilTools.goActivity(this,HomeActivity.class);
+                UtilTools.goActivity(this,HomepageActivity.class);
                 break;
             default:
                 HashMap<String,String> paramsMap = new HashMap<>();
