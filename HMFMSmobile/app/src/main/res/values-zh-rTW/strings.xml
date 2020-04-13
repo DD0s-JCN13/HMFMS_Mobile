@@ -28,4 +28,5 @@
     <string name="lost_item">遺失清單</string>
     <string name="err_location">異常地點</string>
     <string name="title_activity_home">主畫面</string>
+    <string name="title_activity_checklist" >巡檢清單</string>
 </resources>

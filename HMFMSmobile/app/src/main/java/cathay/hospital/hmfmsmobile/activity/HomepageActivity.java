@@ -7,9 +7,9 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
 
-import android.drm.DrmStore;
+import cathay.hospital.hmfmsmobile.util.UtilTools;
+
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -38,31 +38,27 @@ public class HomepageActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                drawerLayout.closeDrawer(GravityCompat.START);
+        navigationView.setNavigationItemSelectedListener(item -> {
+            drawerLayout.closeDrawer(GravityCompat.START);
 
-                int id = item.getItemId();
-                if (id == R.id.nav_home){
-                    Toast.makeText(HomepageActivity.this, "Already on this page!!",
-                            Toast.LENGTH_SHORT).show();
-                    return true;
-                }else if (id == R.id.nav_checklist){
-                    Toast.makeText(HomepageActivity.this, "Check List direction",
-                            Toast.LENGTH_SHORT).show();
-                    return true;
-                }else if (id == R.id.nav_errorlocation){
-                    Toast.makeText(HomepageActivity.this, "Error Location direction",
-                            Toast.LENGTH_LONG).show();
-                    return true;
-                }else if (id == R.id.nav_locationmap){
-                    Toast.makeText(HomepageActivity.this, "Location Map direction",
-                            Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-                return false;
+            int id = item.getItemId();
+            if (id == R.id.nav_home){
+                Toast.makeText(HomepageActivity.this, "Already on this page!!",
+                        Toast.LENGTH_SHORT).show();
+                return true;
+            }else if (id == R.id.nav_checklist){
+                UtilTools.goActivity(this,CheckListActivity.class);
+                return true;
+            }else if (id == R.id.nav_errorlocation){
+                Toast.makeText(HomepageActivity.this, "Error Location direction",
+                        Toast.LENGTH_SHORT).show();
+                return true;
+            }else if (id == R.id.nav_locationmap){
+                Toast.makeText(HomepageActivity.this, "Location Map direction",
+                        Toast.LENGTH_SHORT).show();
+                return true;
             }
+            return false;
         });
         navigationView.getMenu().getItem(0).setChecked(true);
     }
