@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import cathay.hospital.hmfmsmobile.util.UtilTools;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ public class HomepageActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private Toolbar toolbar;
+    private boolean sysCondition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,8 @@ public class HomepageActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar_home);
         drawerLayout = findViewById(R.id.home_drawer);
         navigationView = findViewById(R.id.nav_view_home);
+
+        sysCondition = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
 
         setSupportActionBar(toolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -48,6 +52,9 @@ public class HomepageActivity extends AppCompatActivity {
                 return true;
             }else if (id == R.id.nav_checklist){
                 UtilTools.goActivity(this,CheckListActivity.class);
+                if(sysCondition){
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                }
                 return true;
             }else if (id == R.id.nav_errorlocation){
                 Toast.makeText(HomepageActivity.this, "Error Location direction",

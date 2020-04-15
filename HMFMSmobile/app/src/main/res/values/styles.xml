@@ -7,6 +7,12 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    
+    <style name="SwapAnimeTheme" parent="android:Theme.Material">
+        <!-- Window transition enable condition -->
+        <item name="android:windowActivityTransitions">true</item>
+        <!-- Enter/Exit transition specify-->
+    </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
