@@ -25,13 +25,14 @@ public class CheckListActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private BottomNavigationView bottomNavigationView;
     private Toolbar toolbar;
-    private boolean sysCondition;
+    //Check system version because activity switch animation
+    //needs the lowest requirement of API 21.
+    private boolean sysCondition = Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_list);
-        CheckSysVersion();
         findView();
         setChecked();
         ActionBarSet();
@@ -108,12 +109,6 @@ public class CheckListActivity extends AppCompatActivity {
             }
             return false;
         });
-    }
-
-    protected void CheckSysVersion() {
-        //Check system version because activity switch animation
-        //needs the lowest requirement of API 21.
-        sysCondition = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     }
 
     protected void fadeSwitchAnimation(){
