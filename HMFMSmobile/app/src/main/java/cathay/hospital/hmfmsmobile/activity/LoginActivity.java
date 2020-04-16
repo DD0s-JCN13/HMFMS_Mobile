@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             sharedMap.put("userName", loginData.getUserName());
                             sharedPrefsModel.setSharedPrefsData(sharedMap);
 
-                            UtilTools.goActivity(this,HomeActivity.class);
+                            UtilTools.goActivity(this,HomepageActivity.class);
                         }else{
                             textError.setText(R.string.loginError);
                         }

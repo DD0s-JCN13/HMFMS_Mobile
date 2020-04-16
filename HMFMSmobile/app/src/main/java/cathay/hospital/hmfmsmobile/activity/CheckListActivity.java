@@ -63,7 +63,7 @@ public class CheckListActivity extends AppCompatActivity {
 
     protected void NavigationDrawerSet(){
         navigationView.setNavigationItemSelectedListener(item -> {
-            drawerLayout.closeDrawer((GravityCompat.START));
+            drawerLayout.closeDrawer(GravityCompat.START);
 
             int id = item.getItemId();
 
