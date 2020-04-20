@@ -24,8 +24,7 @@
     <string name="check_list">Check List</string>
     <string name="lost_item">Lost Item List</string>
     <string name="err_loc">Error location List</string>
-    <string name="title_activity_home">Homepage</string>
-    <string name="title_activity_checklist" >Check List</string>
+    <string name="title_activity_checklist">Check List</string>
     <string name="new_equ">New Equipment</string>
     <string name="del_loc">Remove Location</string>
     <string name="acc_info">Account Info</string>
