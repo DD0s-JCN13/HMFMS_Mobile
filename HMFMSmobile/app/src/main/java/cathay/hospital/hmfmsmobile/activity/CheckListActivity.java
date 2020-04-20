@@ -76,12 +76,12 @@ public class CheckListActivity extends AppCompatActivity {
                     Toast.makeText(CheckListActivity.this, "Already on this page!!",
                             Toast.LENGTH_SHORT).show();
                     return true;
-                case R.id.nav_errorlocation:
+                case R.id.nav_err_loc:
                     Toast.makeText(CheckListActivity.this, "Error Location direction",
                             Toast.LENGTH_SHORT).show();
                     return true;
-                case R.id.nav_locationmap:
-                    Toast.makeText(CheckListActivity.this, "Location Map direction",
+                case R.id.nav_del_loc:
+                    Toast.makeText(CheckListActivity.this, "Delete Location direction",
                             Toast.LENGTH_SHORT).show();
                     return true;
             }

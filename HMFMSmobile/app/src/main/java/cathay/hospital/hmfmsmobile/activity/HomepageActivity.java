@@ -75,12 +75,12 @@ public class HomepageActivity extends AppCompatActivity {
                     UtilTools.goActivity(this, CheckListActivity.class);
                     if(sysCondition){   fadeSwitchAnimation();  }
                     return true;
-                case R.id.nav_errorlocation:
+                case R.id.nav_err_loc:
                     Toast.makeText(HomepageActivity.this, "Error Location direction",
                             Toast.LENGTH_SHORT).show();
                     return true;
-                case R.id.nav_locationmap:
-                    Toast.makeText(HomepageActivity.this, "Location Map direction",
+                case R.id.nav_del_loc:
+                    Toast.makeText(HomepageActivity.this, "Delete Location direction",
                             Toast.LENGTH_SHORT).show();
                     return true;
             }

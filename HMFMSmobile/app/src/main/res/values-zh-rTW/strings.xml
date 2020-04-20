@@ -22,10 +22,12 @@
     <string name="title_activity_homepage">行動化消防設備巡檢系統</string>
 
     <string name="option">選項</string>
-    <string name="location_map">地點地圖</string>
     <string name="check_list">巡檢清單</string>
     <string name="lost_item">遺失清單</string>
-    <string name="err_location">異常地點</string>
+    <string name="err_loc">異常地點</string>
     <string name="title_activity_home">主畫面</string>
     <string name="title_activity_checklist" >巡檢清單</string>
+    <string name="new_equ">新增設備</string>
+    <string name="del_loc">註銷地點</string>
+    <string name="acc_info">帳號內容</string>
 </resources>

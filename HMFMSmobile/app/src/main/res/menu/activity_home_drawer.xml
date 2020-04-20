@@ -13,12 +13,12 @@
             android:icon="@mipmap/single_folded_content"
             android:title="@string/check_list"/>
         <item
-            android:id="@+id/nav_errorlocation"
+            android:id="@+id/nav_err_loc"
             android:icon="@mipmap/ic_highlight_off_24px"
-            android:title="@string/err_location"/>
+            android:title="@string/err_loc"/>
         <item
-            android:id="@+id/nav_locationmap"
-            android:icon="@mipmap/ic_map_48px"
-            android:title="@string/location_map"/>
+            android:id="@+id/nav_del_loc"
+            android:icon="@mipmap/ic_location_off_24px"
+            android:title="@string/del_loc"/>
     </group>
 </menu>
