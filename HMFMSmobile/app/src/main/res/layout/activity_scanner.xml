@@ -28,9 +28,31 @@
 
 
 
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_nav_scanner"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="0dp"
+                android:background="#eff2ed"
+                app:itemIconTint="@color/btm_nav_selector"
+                app:itemTextColor="@color/btm_nav_selector"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constrainRight_toRightOf="parent"
+                app:menu="@menu/activity_bottom_navigate"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </RelativeLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view_scanner"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:layout_gravity="start"
+        app:itemTextColor="@color/btm_nav_selector"
+        app:itemIconTint="@color/btm_nav_selector"
+        app:headerLayout="@layout/nav_header_home"
+        app:menu="@menu/activity_home_drawer"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
