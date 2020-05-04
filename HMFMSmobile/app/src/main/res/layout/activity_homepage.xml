@@ -30,27 +30,29 @@
                 android:id="@+id/home_usrName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:textAlignment="viewStart"
                 android:textSize="30sp"
-                app:layout_constraintTop_toTopOf="@+id/const_home"
+                app:layout_constraintBottom_toTopOf="@+id/bottom_nav_home"
                 app:layout_constraintLeft_toLeftOf="@id/const_home"
-                app:layout_constraintRight_toRightOf="@id/const_home"/>
+                app:layout_constraintRight_toRightOf="@id/const_home"
+                app:layout_constraintTop_toTopOf="@+id/const_home"
+                app:layout_constraintVertical_bias="0.05" />
 
             <TextView
                 android:id="@+id/home_divNo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:textAlignment="viewStart"
                 android:textSize="15sp"
-                app:layout_constraintTop_toBottomOf="@id/home_usrName"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"/>
+                app:layout_constraintBottom_toTopOf="@+id/bottom_nav_home"
+                app:layout_constraintLeft_toLeftOf="@id/const_home"
+                app:layout_constraintRight_toRightOf="@id/const_home"
+                app:layout_constraintTop_toTopOf="@+id/const_home"
+                app:layout_constraintVertical_bias="0.15"/>
 
             <ImageView
                 android:id="@+id/home_spacer"
@@ -58,11 +60,12 @@
                 android:layout_height="3dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
                 android:background="#eff2ed"
-                app:layout_constraintTop_toBottomOf="@id/home_divNo"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent" />
+                app:layout_constraintLeft_toLeftOf="@id/const_home"
+                app:layout_constraintRight_toRightOf="@id/const_home"
+                app:layout_constraintTop_toTopOf="@id/const_home"
+                app:layout_constraintBottom_toBottomOf="@id/const_home"
+                app:layout_constraintVertical_bias="0.19"/>
 
             <ImageButton
                 android:id="@+id/home_btn_start"
@@ -70,17 +73,76 @@
                 android:layout_height="100dp"
                 android:src="@drawable/home_start_btn"
                 android:background="@null"
-                android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                app:layout_constraintTop_toBottomOf="@+id/home_spacer"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@id/const_home"
+                app:layout_constraintBottom_toTopOf="@+id/bottom_nav_home"
+                app:layout_constraintLeft_toLeftOf="@id/const_home"
+                app:layout_constraintRight_toRightOf="@id/const_home"
+                app:layout_constraintVertical_bias="0.29"/>
+
+            <Button
+                android:id="@+id/home_btn_NewEqu"
+                android:layout_width="170dp"
+                android:layout_height="120dp"
+                android:background="@color/btn_home_optional"
+                android:text="@string/new_equ"
+                android:gravity="bottom|end"
+                android:paddingEnd="3dp"
+                android:paddingBottom="7dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintTop_toBottomOf="@id/home_btn_start"
+                app:layout_constraintEnd_toStartOf="@id/home_btn_deleteLoc"/>
+
+            <Button
+                android:id="@+id/home_btn_deleteLoc"
+                android:layout_width="170dp"
+                android:layout_height="120dp"
+                android:background="@color/btn_home_optional"
+                android:text="@string/del_loc"
+                android:gravity="bottom|end"
+                android:paddingEnd="3dp"
+                android:paddingBottom="7dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="25dp"
+                app:layout_constraintTop_toBottomOf="@id/home_btn_start"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <Button
+                android:id="@+id/home_btn_account"
+                android:layout_width="170dp"
+                android:layout_height="120dp"
+                android:background="@color/btn_home_optional"
+                android:text="@string/acc_info"
+                android:gravity="bottom|end"
+                android:paddingEnd="3dp"
+                android:paddingBottom="7dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="35dp"
+                app:layout_constraintTop_toBottomOf="@id/home_btn_NewEqu"
+                app:layout_constraintBottom_toTopOf="@id/bottom_nav_home"
+                app:layout_constraintEnd_toStartOf="@id/home_btn_deleteLoc"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <Button
+                android:id="@+id/home_btn_errLoc"
+                android:layout_width="170dp"
+                android:layout_height="120dp"
+                android:background="@color/btn_home_optional"
+                android:text="@string/err_loc"
+                android:gravity="bottom|end"
+                android:paddingEnd="3dp"
+                android:paddingBottom="7dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="35dp"
+                app:layout_constraintBottom_toTopOf="@id/bottom_nav_home"
+                app:layout_constraintTop_toBottomOf="@id/home_btn_deleteLoc"
                 app:layout_constraintRight_toRightOf="parent"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="500px"
-                app:layout_constraintTop_toBottomOf="@id/home_btn_start"></LinearLayout>
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottom_nav_home"
