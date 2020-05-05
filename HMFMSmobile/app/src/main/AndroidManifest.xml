@@ -7,9 +7,11 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission
+    <!--
+<uses-permission
         android:name="android.permission.CAMERA"
         android:required="true" />
+    -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -23,6 +25,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.ScanningActivity"></activity>
         <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,9 +40,10 @@
             android:name=".activity.HomepageActivity"
             android:label="@string/menu_home"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.ScannerActivity"
+        <activity
+            android:name=".activity.ScannerActivity"
             android:label="@string/scanner"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.CheckListActivity"
             android:label="@string/title_activity_checklist"

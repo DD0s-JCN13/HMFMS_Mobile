@@ -11,10 +11,14 @@ import cathay.hospital.hmfmsmobile.util.UtilTools;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.zxing.integration.android.IntentIntegrator;
 
 public class ScannerActivity extends AppCompatActivity {
 
@@ -22,6 +26,8 @@ public class ScannerActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private BottomNavigationView bottomNavigationView;
     private Toolbar toolbar;
+    private TextView tvResult;
+    private Button btnScan;
     private boolean sysCondition = Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP;
 
     @Override
@@ -33,6 +39,21 @@ public class ScannerActivity extends AppCompatActivity {
         setChecked();
         NavigationDrawerSet();
         BottomNavigationSet();
+        TextView tvResult = (TextView) findViewById(R.id.tv_result);
+        Button btnScan = (Button) findViewById(R.id.btn_scan);
+        btnScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new IntentIntegrator(ScannerActivity.this)
+                        .setCaptureActivity(ScanningActivity.class)
+                        .setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)//掃條碼的類型
+                        .setPrompt("請對準條碼")//設置提醒標語
+                        .setCameraId(0)//選擇相機鏡頭，前置或是後置鏡頭
+                        .setBeepEnabled(false)//是否開啟聲音
+                        .setBarcodeImageEnabled(true)//掃描後會產生圖片
+                        .initiateScan();
+            }
+        });
     }
 
     protected void FindView(){
@@ -40,6 +61,8 @@ public class ScannerActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar_scanner);
         navigationView = findViewById(R.id.nav_view_scanner);
         bottomNavigationView = findViewById(R.id.nav_view_scanner);
+        btnScan = findViewById(R.id.btn_scan);
+        tvResult = findViewById(R.id.tv_result);
     }
 
     protected void setChecked(){
