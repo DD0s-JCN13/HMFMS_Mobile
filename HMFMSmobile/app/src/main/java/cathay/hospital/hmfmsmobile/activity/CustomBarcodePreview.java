@@ -1,4 +1,4 @@
-package cathay.hospital.hmfmsmobile.util;
+package cathay.hospital.hmfmsmobile.activity;
 
 import android.content.Context;
 import android.graphics.Rect;

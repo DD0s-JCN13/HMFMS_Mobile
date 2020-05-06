@@ -1,7 +1,7 @@
 package cathay.hospital.hmfmsmobile.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import cathay.hospital.hmfmsmobile.R;
+import cathay.hospital.hmfmsmobile.activity.R;
 
 import android.os.Bundle;
 

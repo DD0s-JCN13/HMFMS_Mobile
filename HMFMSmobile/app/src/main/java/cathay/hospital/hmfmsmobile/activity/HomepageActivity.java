@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
-import cathay.hospital.hmfmsmobile.R;
+import cathay.hospital.hmfmsmobile.activity.R;
 
 public class HomepageActivity extends AppCompatActivity {
 
@@ -98,8 +98,8 @@ public class HomepageActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                     return true;
                 case R.id.action_scanner:
-                    Toast.makeText(HomepageActivity.this, "QR Code Scanner direction",
-                            Toast.LENGTH_SHORT).show();
+                    UtilTools.goActivity(this, ScannerActivity.class);
+                    if(sysCondition) {fadeSwitchAnimation();}
                     return true;
                 case R.id.list_item:
                     UtilTools.goActivity(this, CheckListActivity.class);

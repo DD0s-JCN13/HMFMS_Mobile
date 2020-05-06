@@ -17,7 +17,7 @@ import cathay.hospital.hmfmsmobile.util.UtilTools;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
-import cathay.hospital.hmfmsmobile.R;
+import cathay.hospital.hmfmsmobile.activity.R;
 
 public class CheckListActivity extends AppCompatActivity {
 
@@ -99,8 +99,8 @@ public class CheckListActivity extends AppCompatActivity {
                     if(sysCondition) {fadeSwitchAnimation();}
                     return true;
                 case R.id.action_scanner:
-                    Toast.makeText(CheckListActivity.this, "QR Code Scanner direction",
-                            Toast.LENGTH_SHORT).show();
+                    UtilTools.goActivity(this, ScannerActivity.class);
+                    if(sysCondition) {fadeSwitchAnimation();}
                     return true;
                 case R.id.list_item:
                     Toast.makeText(CheckListActivity.this, "Already on this page!!",

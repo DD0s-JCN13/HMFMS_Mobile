@@ -6,7 +6,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
 
-import cathay.hospital.hmfmsmobile.R;
+import cathay.hospital.hmfmsmobile.activity.R;
 import cathay.hospital.hmfmsmobile.util.UtilTools;
 
 import android.os.Build;
@@ -39,8 +39,6 @@ public class ScannerActivity extends AppCompatActivity {
         setChecked();
         NavigationDrawerSet();
         BottomNavigationSet();
-        TextView tvResult = (TextView) findViewById(R.id.tv_result);
-        Button btnScan = (Button) findViewById(R.id.btn_scan);
         btnScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,7 +58,7 @@ public class ScannerActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.scanner_drawer);
         toolbar = findViewById(R.id.toolbar_scanner);
         navigationView = findViewById(R.id.nav_view_scanner);
-        bottomNavigationView = findViewById(R.id.nav_view_scanner);
+        bottomNavigationView = findViewById(R.id.bottom_nav_scanner);
         btnScan = findViewById(R.id.btn_scan);
         tvResult = findViewById(R.id.tv_result);
     }

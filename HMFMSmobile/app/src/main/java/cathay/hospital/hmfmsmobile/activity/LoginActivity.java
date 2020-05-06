@@ -9,7 +9,7 @@ import android.widget.TextView;
 import java.util.HashMap;
 
 import androidx.appcompat.app.AppCompatActivity;
-import cathay.hospital.hmfmsmobile.R;
+import cathay.hospital.hmfmsmobile.activity.R;
 import cathay.hospital.hmfmsmobile.model.SharedPreferencesModel;
 import cathay.hospital.hmfmsmobile.model.bean.LoginData;
 import cathay.hospital.hmfmsmobile.util.AES;

@@ -7,7 +7,7 @@ import android.os.Bundle;
 import com.journeyapps.barcodescanner.CaptureManager;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 
-import cathay.hospital.hmfmsmobile.R;
+import cathay.hospital.hmfmsmobile.activity.R;
 
 public class ScanningActivity extends AppCompatActivity {
 
@@ -18,7 +18,7 @@ public class ScanningActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanning);
-        barcodeScannerView = (DecoratedBarcodeView) findViewById(R.id.zxing_scanner);
+        barcodeScannerView = findViewById(R.id.zxing_scanner);
 
         capture = new CaptureManager(this, barcodeScannerView);
         capture.initializeFromIntent(getIntent(), savedInstanceState);

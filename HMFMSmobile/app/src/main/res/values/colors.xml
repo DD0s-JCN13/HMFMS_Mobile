@@ -9,5 +9,7 @@
     <color name="white">#ffffff</color>
     <color name="selected_back">#BFBFBF</color>
     <color name="btn_home_optional">#e8eeed</color>
+    <color name="green">#00A94F</color>
+    <color name="warm_yellow">#FFE316</color>
 
 </resources>

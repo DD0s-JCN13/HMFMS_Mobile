@@ -1,4 +1,4 @@
-package cathay.hospital.hmfmsmobile.util;
+package cathay.hospital.hmfmsmobile.activity;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -18,6 +18,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cathay.hospital.hmfmsmobile.activity.R;
 
 public class ZxingViewFinderView extends ViewfinderView {
 
