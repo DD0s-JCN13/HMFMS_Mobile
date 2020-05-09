@@ -1,5 +1,6 @@
 package cathay.hospital.hmfmsmobile.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -9,6 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 import cathay.hospital.hmfmsmobile.activity.R;
 import cathay.hospital.hmfmsmobile.util.UtilTools;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 public class ScannerActivity extends AppCompatActivity {
 
@@ -127,5 +130,19 @@ public class ScannerActivity extends AppCompatActivity {
 
     protected void fadeSwitchAnimation(){
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
+        if(result!=null){
+            if(result.getContents()==null){
+                Toast.makeText(this,"no result",Toast.LENGTH_LONG).show();
+            }else {
+                tvResult.setText(result.getContents().toString());
+            }
+        }else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }
