@@ -26,11 +26,13 @@
             android:layout_height="match_parent"
             android:layout_below="@id/toolbar_home">
             <TableLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:shrinkColumns="0"
                 android:stretchColumns="1"
-                tools:ignore="MissingConstraints">
+                tools:ignore="MissingConstraints"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
 
                 <TextView
                     android:id="@+id/home_usrName"
@@ -151,24 +153,18 @@
 
                 </TableRow>
 
-
-
-
-
-                <com.google.android.material.bottomnavigation.BottomNavigationView
-                    android:id="@+id/bottom_nav_home"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:layout_marginTop="35dp"
-                    android:background="#eff2ed"
-                    app:itemIconTint="@color/btm_nav_selector"
-                    app:itemTextColor="@color/btm_nav_selector"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/home_btn_errLoc"
-                    app:menu="@menu/activity_bottom_navigate" />
             </TableLayout>
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_nav_home"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#eff2ed"
+                app:itemIconTint="@color/btm_nav_selector"
+                app:itemTextColor="@color/btm_nav_selector"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:menu="@menu/activity_bottom_navigate" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </RelativeLayout>
 
