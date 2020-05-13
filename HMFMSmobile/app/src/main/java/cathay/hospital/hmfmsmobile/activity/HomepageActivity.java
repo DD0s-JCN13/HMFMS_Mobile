@@ -9,13 +9,20 @@ import androidx.appcompat.widget.Toolbar;
 
 import cathay.hospital.hmfmsmobile.util.UtilTools;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.zxing.integration.android.IntentIntegrator;
+
+import java.util.Scanner;
 
 import cathay.hospital.hmfmsmobile.activity.R;
 
@@ -25,6 +32,7 @@ public class HomepageActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private BottomNavigationView bottomNavigationView;
     private Toolbar toolbar;
+    private ImageButton imageButton;
     //Check system version because activity switch animation
     //needs the lowest requirement of API 21.
     private boolean sysCondition = Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP;
@@ -38,6 +46,7 @@ public class HomepageActivity extends AppCompatActivity {
         ActionBarSet();
         NavigationDrawerSet();
         BottomNavigationSet();
+        StartBtnFunc();
     }
 
     protected void FindView(){
@@ -45,6 +54,7 @@ public class HomepageActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.home_drawer);
         navigationView = findViewById(R.id.nav_view_home);
         bottomNavigationView = findViewById(R.id.bottom_nav_home);
+        imageButton = findViewById(R.id.home_btn_start);
     }
 
     protected void setChecked(){
@@ -114,5 +124,15 @@ public class HomepageActivity extends AppCompatActivity {
         //Variable at the front is enter animation,
         //at the back is exit animation.
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
+
+    protected void StartBtnFunc(){
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UtilTools.goActivity(HomepageActivity.this, ScannerActivity.class);
+                if(sysCondition){fadeSwitchAnimation();}
+            }
+        });
     }
 }

@@ -1,17 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scanner_drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ScanningActivity">
+    tools:openDrawer="start">
 
-    <com.journeyapps.barcodescanner.DecoratedBarcodeView
-        android:id="@+id/zxing_scanner"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:zxing_scanner_layout="@layout/code_scanning_scanner">
+        android:layout_height="match_parent">
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_scanner"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/THEME_color"
+                android:elevation="4dp"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
-    </com.journeyapps.barcodescanner.DecoratedBarcodeView>
+            <com.journeyapps.barcodescanner.DecoratedBarcodeView
+                android:layout_weight="3"
+                android:id="@+id/zxing_scanner"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                app:zxing_scanner_layout="@layout/code_scanning_scanner"
+                app:layout_constraintVertical_bias="0.25"/>
 
-</RelativeLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_weight="2"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent">
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>
