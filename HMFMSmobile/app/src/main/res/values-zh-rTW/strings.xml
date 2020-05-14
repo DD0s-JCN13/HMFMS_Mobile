@@ -29,4 +29,5 @@
     <string name="new_equ">新增設備</string>
     <string name="del_loc">註銷地點</string>
     <string name="acc_info">帳號內容</string>
+    <string name="no_val">掃描失敗，請重新掃描</string>
 </resources>

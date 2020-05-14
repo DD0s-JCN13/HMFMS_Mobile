@@ -28,6 +28,7 @@
     <string name="new_equ">New Equipment</string>
     <string name="del_loc">Remove Location</string>
     <string name="acc_info">Account Info</string>
+    <string name="no_val">No value, please scan again</string>
 
 
 </resources>

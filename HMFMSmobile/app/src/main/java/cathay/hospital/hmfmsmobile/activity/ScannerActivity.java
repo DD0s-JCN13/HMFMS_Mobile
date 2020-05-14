@@ -66,6 +66,8 @@ public class ScannerActivity extends AppCompatActivity {
         tvResult = findViewById(R.id.tv_result);
     }
 
+
+
     protected void setChecked(){
         bottomNavigationView.getMenu().getItem(1).setChecked(true);
     }
@@ -137,7 +139,7 @@ public class ScannerActivity extends AppCompatActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
         if(result!=null){
             if(result.getContents()==null){
-                Toast.makeText(this,"no result",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,R.string.no_val,Toast.LENGTH_LONG).show();
             }else {
                 tvResult.setText(result.getContents().toString());
             }
