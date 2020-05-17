@@ -42,19 +42,7 @@ public class ScannerActivity extends AppCompatActivity {
         setChecked();
         NavigationDrawerSet();
         BottomNavigationSet();
-        btnScan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new IntentIntegrator(ScannerActivity.this)
-                        .setCaptureActivity(ScanningActivity.class)
-                        .setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)//掃條碼的類型
-                        .setPrompt("請對準條碼")//設置提醒標語
-                        .setCameraId(0)//選擇相機鏡頭，前置或是後置鏡頭
-                        .setBeepEnabled(false)//是否開啟聲音
-                        .setBarcodeImageEnabled(true)//掃描後會產生圖片
-                        .initiateScan();
-            }
-        });
+        LocScanFuncSet();
     }
 
     protected void FindView(){
@@ -146,5 +134,21 @@ public class ScannerActivity extends AppCompatActivity {
         }else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    protected void LocScanFuncSet(){
+        btnScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new IntentIntegrator(ScannerActivity.this)
+                        .setCaptureActivity(ScanningActivity.class)
+                        .setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)//掃條碼的類型
+                        .setPrompt("請對準條碼")//設置提醒標語
+                        .setCameraId(0)//選擇相機鏡頭，前置或是後置鏡頭
+                        .setBeepEnabled(false)//是否開啟聲音
+                        .setBarcodeImageEnabled(true)//掃描後會產生圖片
+                        .initiateScan();
+            }
+        });
     }
 }

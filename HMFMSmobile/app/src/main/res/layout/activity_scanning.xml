@@ -11,21 +11,56 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar_scanner"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/THEME_color"
-                android:elevation="4dp"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_scanner"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/THEME_color"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/const_scanner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar_scanner">
 
             <com.journeyapps.barcodescanner.DecoratedBarcodeView
                 android:id="@+id/zxing_scanner"
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:zxing_scanner_layout="@layout/code_scanning_scanner"/>
 
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_nav_scanner"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#eff2ed"
+                app:itemIconTint="@color/btm_nav_selector"
+                app:itemTextColor="@color/btm_nav_selector"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:menu="@menu/activity_bottom_navigate"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </LinearLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view_scanner"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:layout_gravity="start"
+        app:itemTextColor="@color/btm_nav_selector"
+        app:itemIconTint="@color/btm_nav_selector"
+        app:headerLayout="@layout/nav_header_home"
+        app:menu="@menu/activity_home_drawer"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
