@@ -51,7 +51,7 @@
                 <TextView
                     android:id="@+id/home_divNo"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:textAlignment="viewStart"
@@ -60,20 +60,20 @@
                     app:layout_constraintLeft_toLeftOf="@id/const_home"
                     app:layout_constraintRight_toRightOf="@id/const_home"
                     app:layout_constraintTop_toTopOf="@+id/const_home"
-                    app:layout_constraintVertical_bias="0.15"/>
+                    app:layout_constraintVertical_bias="0.15" />
 
                 <ImageView
                     android:id="@+id/home_spacer"
                     android:layout_width="match_parent"
-                    android:layout_height="3dp"
+                    android:layout_height="4dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:background="#eff2ed"
+                    app:layout_constraintBottom_toBottomOf="@id/const_home"
                     app:layout_constraintLeft_toLeftOf="@id/const_home"
                     app:layout_constraintRight_toRightOf="@id/const_home"
                     app:layout_constraintTop_toTopOf="@id/const_home"
-                    app:layout_constraintBottom_toBottomOf="@id/const_home"
-                    app:layout_constraintVertical_bias="0.19"/>
+                    app:layout_constraintVertical_bias="0.19" />
 
                 <ImageButton
                     android:id="@+id/home_btn_start"
@@ -119,7 +119,9 @@
                         android:text="@string/del_loc"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/home_btn_start" />
-                </TableRow><TableRow>
+                </TableRow>
+
+                <TableRow>
 
                 <Button
                     android:id="@+id/home_btn_account"
