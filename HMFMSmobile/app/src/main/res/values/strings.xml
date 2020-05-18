@@ -29,6 +29,10 @@
     <string name="del_loc">Remove Location</string>
     <string name="acc_info">Account Info</string>
     <string name="no_val">No value, please scan again</string>
+    <string name="not_finished_scan">Scanning not finished, want to exit this page?</string>
+    <string name="warn_scanning">Warning</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
 
 
 </resources>

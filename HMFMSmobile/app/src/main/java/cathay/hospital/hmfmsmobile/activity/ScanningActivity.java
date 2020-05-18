@@ -1,8 +1,11 @@
 package cathay.hospital.hmfmsmobile.activity;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -27,6 +30,8 @@ public class ScanningActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private Toolbar toolbar;
     private BottomNavigationView bottomNavigationView;
+    private Class<?> aClass;
+    private boolean Pusher = false;
     private boolean sysCondition = Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP;
 
     @Override
@@ -96,6 +101,11 @@ public class ScanningActivity extends AppCompatActivity {
             int id = item.getItemId();
             switch (id){
                 case R.id.nav_home:
+                    try {
+                        aClass = Class.forName("cathay.hospital.hmfmsmobile.activity.HomepageActivity");
+                        AlertWindow();
+                    } catch (ClassNotFoundException ignored) {
+                    }
                     UtilTools.goActivity(this,HomepageActivity.class);
                     if(sysCondition){fadeSwitchAnimation();}
                     return true;
@@ -140,5 +150,24 @@ public class ScanningActivity extends AppCompatActivity {
 
     protected void fadeSwitchAnimation(){
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
+
+    protected void AlertWindow(){
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.warn_scanning)
+                .setMessage(R.string.not_finished_scan)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        Pusher = true;
+                    }
+                })
+                .setNegativeButton(R.string.cancel, null)
+                .show();
+
+        if(Pusher){
+            UtilTools.goActivity(ScanningActivity.this, aClass);
+            if(sysCondition) {fadeSwitchAnimation();}
+        }
     }
 }
