@@ -31,7 +31,6 @@ public class ScanningActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private BottomNavigationView bottomNavigationView;
     private Class<?> aClass;
-    private boolean Pusher = false;
     private boolean sysCondition = Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP;
 
     @Override
@@ -106,8 +105,6 @@ public class ScanningActivity extends AppCompatActivity {
                         AlertWindow();
                     } catch (ClassNotFoundException ignored) {
                     }
-                    UtilTools.goActivity(this,HomepageActivity.class);
-                    if(sysCondition){fadeSwitchAnimation();}
                     return true;
                 case R.id.nav_checklist:
                     UtilTools.goActivity(this,CheckListActivity.class);
@@ -159,15 +156,12 @@ public class ScanningActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        Pusher = true;
+                        dialog.dismiss();
+                        UtilTools.goActivity(ScanningActivity.this, aClass);
+                        if(sysCondition) {fadeSwitchAnimation();}
                     }
                 })
                 .setNegativeButton(R.string.cancel, null)
                 .show();
-
-        if(Pusher){
-            UtilTools.goActivity(ScanningActivity.this, aClass);
-            if(sysCondition) {fadeSwitchAnimation();}
-        }
     }
 }
