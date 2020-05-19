@@ -166,6 +166,7 @@ public class ScanningActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();
+                        ScannerActivity.scannerActivity.finish();
                         UtilTools.goActivity(ScanningActivity.this, aClass);
                         if(sysCondition) {fadeSwitchAnimation();}
                     }

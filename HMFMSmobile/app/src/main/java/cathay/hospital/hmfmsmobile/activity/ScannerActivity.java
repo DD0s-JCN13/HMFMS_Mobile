@@ -6,8 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
 
-import cathay.hospital.hmfmsmobile.activity.R;
+import cathay.hospital.hmfmsmobile.util.ItemContainer;
 import cathay.hospital.hmfmsmobile.util.UtilTools;
 
 import android.content.Intent;
@@ -25,18 +26,23 @@ import com.google.zxing.integration.android.IntentResult;
 
 public class ScannerActivity extends AppCompatActivity {
 
+    private ItemContainer itemContainer = new ItemContainer();
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private BottomNavigationView bottomNavigationView;
     private Toolbar toolbar;
-    private TextView tvResult;
+    private TextView locResult;
+    private TextView locFloor;
     private Button btnScan;
+    private RecyclerView recyclerView;
     private boolean sysCondition = Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP;
+    public static ScannerActivity scannerActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner);
+        scannerActivity = this;
         FindView();
         ActionBarSet();
         setChecked();
@@ -45,13 +51,16 @@ public class ScannerActivity extends AppCompatActivity {
         LocScanFuncSet();
     }
 
+
     protected void FindView(){
         drawerLayout = findViewById(R.id.scanner_drawer);
         toolbar = findViewById(R.id.toolbar_scanner);
         navigationView = findViewById(R.id.nav_view_scanner);
         bottomNavigationView = findViewById(R.id.bottom_nav_scanner);
         btnScan = findViewById(R.id.btn_scan);
-        tvResult = findViewById(R.id.loc_name);
+        locResult = findViewById(R.id.loc_name);
+        locFloor = findViewById(R.id.loc_floor);
+        recyclerView = findViewById(R.id.recView_item);
     }
 
     protected void setChecked(){
@@ -143,7 +152,14 @@ public class ScannerActivity extends AppCompatActivity {
             if(result.getContents()==null){
                 Toast.makeText(this,R.string.no_val,Toast.LENGTH_LONG).show();
             }else {
-                tvResult.setText(result.getContents().toString());
+                String inputResult = result.getContents().toString();
+                switch (inputResult){
+                    case "test0001":
+                        locResult.setText(R.string.testloc_1);
+                        locFloor.setText(R.string.testfloor_1);
+                    default:
+                        locResult.setText(result.getContents().toString());
+                }
             }
         }else {
             super.onActivityResult(requestCode, resultCode, data);

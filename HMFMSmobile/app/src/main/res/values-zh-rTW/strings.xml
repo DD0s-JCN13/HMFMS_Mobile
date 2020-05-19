@@ -35,4 +35,8 @@
     <string name="ok">確定</string>
     <string name="cancel">取消</string>
     <string name="loc_name">地點名稱</string>
+    <string name="loc_floor">所在樓層</string>
+    <string name="scan">掃描</string>
+    <string name="testloc_1">測試地點0001</string>
+    <string name="testfloor_1">測試1234樓</string>
 </resources>

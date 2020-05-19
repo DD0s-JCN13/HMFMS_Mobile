@@ -34,6 +34,10 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="loc_name">Location Name</string>
+    <string name="loc_floor">Floor of the location</string>
+    <string name="scan">Scan</string>
+    <string name="testloc_1">Test Location 0001</string>
+    <string name="testfloor_1">1234 Floor testing</string>
 
 
 </resources>
