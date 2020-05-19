@@ -51,10 +51,8 @@ public class ScannerActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.nav_view_scanner);
         bottomNavigationView = findViewById(R.id.bottom_nav_scanner);
         btnScan = findViewById(R.id.btn_scan);
-        tvResult = findViewById(R.id.tv_result);
+        tvResult = findViewById(R.id.loc_name);
     }
-
-
 
     protected void setChecked(){
         bottomNavigationView.getMenu().getItem(1).setChecked(true);
@@ -122,20 +120,6 @@ public class ScannerActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
-        if(result!=null){
-            if(result.getContents()==null){
-                Toast.makeText(this,R.string.no_val,Toast.LENGTH_LONG).show();
-            }else {
-                tvResult.setText(result.getContents().toString());
-            }
-        }else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
-
     protected void LocScanFuncSet(){
         btnScan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,4 +135,19 @@ public class ScannerActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
+        if(result!=null){
+            if(result.getContents()==null){
+                Toast.makeText(this,R.string.no_val,Toast.LENGTH_LONG).show();
+            }else {
+                tvResult.setText(result.getContents().toString());
+            }
+        }else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
 }

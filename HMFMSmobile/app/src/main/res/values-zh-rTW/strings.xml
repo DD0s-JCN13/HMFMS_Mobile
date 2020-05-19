@@ -34,4 +34,5 @@
     <string name="warn_scanning">注意</string>
     <string name="ok">確定</string>
     <string name="cancel">取消</string>
+    <string name="loc_name">地點名稱</string>
 </resources>

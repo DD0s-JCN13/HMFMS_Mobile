@@ -107,8 +107,11 @@ public class ScanningActivity extends AppCompatActivity {
                     }
                     return true;
                 case R.id.nav_checklist:
-                    UtilTools.goActivity(this,CheckListActivity.class);
-                    if(sysCondition){fadeSwitchAnimation();}
+                    try {
+                        aClass = Class.forName("cathay.hospital.hmfmsmobile.activity.CheckListActivity");
+                        AlertWindow();
+                    } catch (ClassNotFoundException ignored) {
+                    }
                     return true;
                 case R.id.nav_err_loc:
                     Toast.makeText(ScanningActivity.this, "Error Location direction",
@@ -129,16 +132,22 @@ public class ScanningActivity extends AppCompatActivity {
 
             switch (id){
                 case R.id.action_homeapge:
-                    UtilTools.goActivity(this, HomepageActivity.class);
-                    if(sysCondition) {fadeSwitchAnimation();}
+                    try {
+                        aClass = Class.forName("cathay.hospital.hmfmsmobile.activity.HomepageActivity");
+                        AlertWindow();
+                    } catch (ClassNotFoundException ignored) {
+                    }
                     return true;
                 case R.id.action_scanner:
                     Toast.makeText(ScanningActivity.this, "Already on this page!!",
                             Toast.LENGTH_SHORT).show();
                     return true;
                 case R.id.list_item:
-                    UtilTools.goActivity(this, CheckListActivity.class);
-                    if(sysCondition) {fadeSwitchAnimation();}
+                    try {
+                        aClass = Class.forName("cathay.hospital.hmfmsmobile.activity.CheckListActivity");
+                        AlertWindow();
+                    } catch (ClassNotFoundException ignored) {
+                    }
                     return true;
             }
             return false;

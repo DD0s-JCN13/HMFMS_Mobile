@@ -33,6 +33,7 @@
     <string name="warn_scanning">Warning</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="loc_name">Location Name</string>
 
 
 </resources>
