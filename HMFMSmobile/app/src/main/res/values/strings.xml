@@ -38,6 +38,8 @@
     <string name="scan">Scan</string>
     <string name="testloc_1">Test Location 0001</string>
     <string name="testfloor_1">1234 Floor testing</string>
+    <string name="scan_finished">Send</string>
+    <string name="tstDev_name">Test device type 9999</string>
 
 
 </resources>

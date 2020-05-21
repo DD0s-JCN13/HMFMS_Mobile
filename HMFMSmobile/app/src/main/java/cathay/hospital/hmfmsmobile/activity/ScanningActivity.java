@@ -31,6 +31,7 @@ public class ScanningActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private BottomNavigationView bottomNavigationView;
     private Class<?> aClass;
+    private boolean itemColorSet = false;
     private boolean sysCondition = Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP;
 
     @Override
@@ -105,22 +106,22 @@ public class ScanningActivity extends AppCompatActivity {
                         AlertWindow();
                     } catch (ClassNotFoundException ignored) {
                     }
-                    return true;
+                    return itemColorSet;
                 case R.id.nav_checklist:
                     try {
                         aClass = Class.forName("cathay.hospital.hmfmsmobile.activity.CheckListActivity");
                         AlertWindow();
                     } catch (ClassNotFoundException ignored) {
                     }
-                    return true;
+                    return itemColorSet;
                 case R.id.nav_err_loc:
                     Toast.makeText(ScanningActivity.this, "Error Location direction",
                             Toast.LENGTH_SHORT).show();
-                    return true;
+                    return itemColorSet;
                 case R.id.nav_del_loc:
                     Toast.makeText(ScanningActivity.this, "Delete Location direction",
                             Toast.LENGTH_SHORT).show();
-                    return true;
+                    return itemColorSet;
             }
             return false;
         });
@@ -137,18 +138,18 @@ public class ScanningActivity extends AppCompatActivity {
                         AlertWindow();
                     } catch (ClassNotFoundException ignored) {
                     }
-                    return true;
+                    return itemColorSet;
                 case R.id.action_scanner:
                     Toast.makeText(ScanningActivity.this, "Already on this page!!",
                             Toast.LENGTH_SHORT).show();
-                    return true;
+                    return itemColorSet;
                 case R.id.list_item:
                     try {
                         aClass = Class.forName("cathay.hospital.hmfmsmobile.activity.CheckListActivity");
                         AlertWindow();
                     } catch (ClassNotFoundException ignored) {
                     }
-                    return true;
+                    return itemColorSet;
             }
             return false;
         });
@@ -166,12 +167,19 @@ public class ScanningActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();
+                        itemColorSet = true;
                         ScannerActivity.scannerActivity.finish();
                         UtilTools.goActivity(ScanningActivity.this, aClass);
                         if(sysCondition) {fadeSwitchAnimation();}
                     }
                 })
-                .setNegativeButton(R.string.cancel, null)
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                        itemColorSet = false;
+                    }
+                })
                 .show();
     }
 }

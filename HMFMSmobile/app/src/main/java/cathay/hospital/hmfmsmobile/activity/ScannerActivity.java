@@ -1,20 +1,25 @@
 package cathay.hospital.hmfmsmobile.activity;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import cathay.hospital.hmfmsmobile.util.ItemContainer;
 import cathay.hospital.hmfmsmobile.util.UtilTools;
+import cathay.hospital.hmfmsmobile.util.ItemContainer;
 
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +31,6 @@ import com.google.zxing.integration.android.IntentResult;
 
 public class ScannerActivity extends AppCompatActivity {
 
-    private ItemContainer itemContainer = new ItemContainer();
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private BottomNavigationView bottomNavigationView;
@@ -34,9 +38,11 @@ public class ScannerActivity extends AppCompatActivity {
     private TextView locResult;
     private TextView locFloor;
     private Button btnScan;
-    private RecyclerView recyclerView;
+    private Button btnConfirm;
+    private RecyclerView recList;
     private boolean sysCondition = Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP;
     public static ScannerActivity scannerActivity;
+    public static String ItemCondition="0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +55,10 @@ public class ScannerActivity extends AppCompatActivity {
         NavigationDrawerSet();
         BottomNavigationSet();
         LocScanFuncSet();
+        recList.setHasFixedSize(true);
+        recList.setLayoutManager(new LinearLayoutManager(this));
+        recList.setAdapter(new ItemAdapter());
     }
-
 
     protected void FindView(){
         drawerLayout = findViewById(R.id.scanner_drawer);
@@ -58,9 +66,10 @@ public class ScannerActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.nav_view_scanner);
         bottomNavigationView = findViewById(R.id.bottom_nav_scanner);
         btnScan = findViewById(R.id.btn_scan);
+        btnConfirm = findViewById(R.id.btn_Confirm);
         locResult = findViewById(R.id.loc_name);
         locFloor = findViewById(R.id.loc_floor);
-        recyclerView = findViewById(R.id.recView_item);
+        recList = findViewById(R.id.recView_item);
     }
 
     protected void setChecked(){
@@ -157,6 +166,11 @@ public class ScannerActivity extends AppCompatActivity {
                     case "test0001":
                         locResult.setText(R.string.testloc_1);
                         locFloor.setText(R.string.testfloor_1);
+                        btnScan.setVisibility(View.GONE);
+                        btnConfirm.setVisibility(View.VISIBLE);
+                        ItemCondition = "TEST";
+                        ItemContainer.setItemLength(ItemCondition);
+                        SendItemCount();
                     default:
                         locResult.setText(result.getContents().toString());
                 }
@@ -164,6 +178,51 @@ public class ScannerActivity extends AppCompatActivity {
         }else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemStructure>{
+        @NonNull
+        @Override
+        public ItemStructure onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new ItemStructure(getLayoutInflater().inflate(R.layout.item_role, parent, false));
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ItemStructure structure, int position) {
+            if(ItemCondition.equals("0")){
+                structure.itemID.setText(ItemContainer.item[0].getItemDataByCondition(ItemCondition));
+                structure.itemType.setText("");
+            }else if(ItemCondition.equals("TEST")){
+                Log.d("ritemc", ItemCondition);
+                //structure.itemID.setText(ItemContainer.item[position].tget().toString());
+                structure.itemID.setText(ItemContainer.item[position].getItemDataByCondition(ItemCondition));
+                structure.itemType.setText(R.string.tstDev_name);
+            }else {
+
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            if(ItemCondition.equals("0")){
+                return 0;
+            }else{
+                return ItemContainer.item.length;
+            }
+        }
+
+        class ItemStructure extends RecyclerView.ViewHolder{
+            TextView itemID, itemType;
+            public ItemStructure(View itemView){
+                super(itemView);
+                itemType = findViewById(R.id.item_type);
+                itemID = findViewById(R.id.item_propNum);
+            }
+        }
+    }
+
+    public static String SendItemCount(){
+        return ItemCondition;
     }
 
 }

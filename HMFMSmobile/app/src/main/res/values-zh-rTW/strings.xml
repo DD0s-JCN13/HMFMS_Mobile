@@ -39,4 +39,6 @@
     <string name="scan">掃描</string>
     <string name="testloc_1">測試地點0001</string>
     <string name="testfloor_1">測試1234樓</string>
+    <string name="scan_finished">送出</string>
+    <string name="tstDev_name">測試用裝置9999型</string>
 </resources>
