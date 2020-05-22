@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import cathay.hospital.hmfmsmobile.util.ItemContainer;
 import cathay.hospital.hmfmsmobile.util.UtilTools;
-import cathay.hospital.hmfmsmobile.util.ItemContainer;
+import cathay.hospital.hmfmsmobile.util.Items;
 
 import android.content.Intent;
 import android.os.Build;
@@ -43,6 +43,8 @@ public class ScannerActivity extends AppCompatActivity {
     private boolean sysCondition = Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP;
     public static ScannerActivity scannerActivity;
     public static String ItemCondition="0";
+
+    ItemContainer itemContainer = new ItemContainer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,7 +171,8 @@ public class ScannerActivity extends AppCompatActivity {
                         btnScan.setVisibility(View.GONE);
                         btnConfirm.setVisibility(View.VISIBLE);
                         ItemCondition = "TEST";
-                        ItemContainer.setItemLength(ItemCondition);
+                        //ItemContainer.setItemLength(ItemCondition);
+
                         SendItemCount();
                     default:
                         locResult.setText(result.getContents().toString());
@@ -190,12 +193,12 @@ public class ScannerActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull ItemStructure structure, int position) {
             if(ItemCondition.equals("0")){
-                structure.itemID.setText(ItemContainer.item[0].getItemDataByCondition(ItemCondition));
+                structure.itemID.setText(itemContainer.item[0].getList());
                 structure.itemType.setText("");
             }else if(ItemCondition.equals("TEST")){
                 Log.d("ritemc", ItemCondition);
-                //structure.itemID.setText(ItemContainer.item[position].tget().toString());
-                structure.itemID.setText(ItemContainer.item[position].getItemDataByCondition(ItemCondition));
+                Log.d("ItemArrayLength", String.valueOf(itemContainer.item[0].getList(ItemCondition) ==null));
+                structure.itemID.setText(String.valueOf(itemContainer.item[position].getList(ItemCondition)));
                 structure.itemType.setText(R.string.tstDev_name);
             }else {
 
@@ -204,10 +207,12 @@ public class ScannerActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            if(ItemCondition.equals("0")){
+            if(ItemCondition.equals("0")) {
                 return 0;
+            }else if(ItemCondition.equals("TEST")){
+                return 3;
             }else{
-                return ItemContainer.item.length;
+                return itemContainer.item.length;
             }
         }
 

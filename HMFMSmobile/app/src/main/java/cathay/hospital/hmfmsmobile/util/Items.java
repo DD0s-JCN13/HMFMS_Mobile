@@ -13,19 +13,13 @@ public class Items {
         this.number = number;
     }
 
-    public  String tget(){
-        return "DEVICE-TEST-0000";
+    public String getList(){
+        itemCondition = ScannerActivity.SendItemCount();
+        Log.d("ItemGetCondition", itemCondition);
+        return "EMPTY";
     }
-    public String getItemDataByCondition(String itemcondition){
-        this.itemCondition= itemcondition;
-        //itemCondition = ScannerActivity.SendItemCount();
-        Log.d("itemsgetcondi", itemCondition);
-        if(itemCondition.equals("TEST")){
-            return "DEVICE-TEST-0000"+number;
-        }else if(itemCondition.equals("0")){
-            return "EMPTY";
-        }else{
-            return "EMPTY";
-        }
+
+    public String getList(String condition){
+        return "DEVICE-TEST-0000"+number;
     }
 }
