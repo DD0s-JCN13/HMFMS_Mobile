@@ -44,7 +44,7 @@ public class ScannerActivity extends AppCompatActivity {
     public static ScannerActivity scannerActivity;
     public static String ItemCondition="0";
 
-    ItemContainer itemContainer = new ItemContainer();
+    ItemContainer itemC = new ItemContainer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +57,6 @@ public class ScannerActivity extends AppCompatActivity {
         NavigationDrawerSet();
         BottomNavigationSet();
         LocScanFuncSet();
-        recList.setHasFixedSize(true);
-        recList.setLayoutManager(new LinearLayoutManager(this));
-        recList.setAdapter(new ItemAdapter());
     }
 
     protected void FindView(){
@@ -163,19 +160,20 @@ public class ScannerActivity extends AppCompatActivity {
             if(result.getContents()==null){
                 Toast.makeText(this,R.string.no_val,Toast.LENGTH_LONG).show();
             }else {
-                String inputResult = result.getContents().toString();
+                Log.d("InfoScan", String.valueOf(result));
+                String inputResult = result.getContents();
                 switch (inputResult){
                     case "test0001":
                         locResult.setText(R.string.testloc_1);
                         locFloor.setText(R.string.testfloor_1);
-                        btnScan.setVisibility(View.GONE);
+                        btnScan.setVisibility(View.INVISIBLE);
                         btnConfirm.setVisibility(View.VISIBLE);
+                        recList.setVisibility(View.VISIBLE);
                         ItemCondition = "TEST";
-                        //ItemContainer.setItemLength(ItemCondition);
-
-                        SendItemCount();
+                        onCreateRecycleView();
                     default:
-                        locResult.setText(result.getContents().toString());
+                        locResult.setText(result.getContents());
+                        onCreateRecycleView();
                 }
             }
         }else {
@@ -183,6 +181,11 @@ public class ScannerActivity extends AppCompatActivity {
         }
     }
 
+    protected void onCreateRecycleView(){
+        recList.setHasFixedSize(true);
+        recList.setLayoutManager(new LinearLayoutManager(this));
+        recList.setAdapter(new ItemAdapter());
+    }
     class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemStructure>{
         @NonNull
         @Override
@@ -193,14 +196,16 @@ public class ScannerActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull ItemStructure structure, int position) {
             if(ItemCondition.equals("0")){
-                structure.itemID.setText(itemContainer.item[0].getList());
+                Log.d("InfoGet1stOnFake", String.valueOf(itemC.item[position].NoItems()));
+                structure.itemID.setText(itemC.item[0].NoItems());
                 structure.itemType.setText("");
             }else if(ItemCondition.equals("TEST")){
-                Log.d("ritemc", ItemCondition);
-                Log.d("ItemArrayLength", String.valueOf(itemContainer.item[0].getList(ItemCondition) ==null));
-                structure.itemID.setText(String.valueOf(itemContainer.item[position].getList(ItemCondition)));
+                Log.d("InfoListLength", String.valueOf(itemC.item.length));
+                Log.d("InfoGet1stOnList", String.valueOf(itemC.item[1].getTest()));
+                structure.itemID.setText("SEVICE-TEST-000"+String.valueOf(position));
                 structure.itemType.setText(R.string.tstDev_name);
             }else {
+                structure.itemID.setText(itemC.item[position].getList());
 
             }
         }
@@ -212,7 +217,7 @@ public class ScannerActivity extends AppCompatActivity {
             }else if(ItemCondition.equals("TEST")){
                 return 3;
             }else{
-                return itemContainer.item.length;
+                return itemC.item.length;
             }
         }
 
@@ -220,14 +225,10 @@ public class ScannerActivity extends AppCompatActivity {
             TextView itemID, itemType;
             public ItemStructure(View itemView){
                 super(itemView);
-                itemType = findViewById(R.id.item_type);
-                itemID = findViewById(R.id.item_propNum);
+                itemType = itemView.findViewById(R.id.item_type);
+                itemID = itemView.findViewById(R.id.item_propNum);
             }
         }
-    }
-
-    public static String SendItemCount(){
-        return ItemCondition;
     }
 
 }
