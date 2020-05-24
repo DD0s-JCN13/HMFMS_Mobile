@@ -9,7 +9,7 @@
     <string name="refresh">清除</string>
     <string name="home">首頁</string>
     <string name="map">地圖</string>
-    <string name="scanner">QR Code 掃描器</string>
+    <string name="scanner">設備條碼掃描</string>
     <string name="navigation_drawer_open">開啟側面選單</string>
     <string name="navigation_drawer_close">關閉側面選單</string>
     <string name="nav_header_title">Android Studio</string>
@@ -36,9 +36,9 @@
     <string name="cancel">取消</string>
     <string name="loc_name">地點名稱</string>
     <string name="loc_floor">所在樓層</string>
-    <string name="scan">掃描</string>
     <string name="testloc_1">測試地點0001</string>
     <string name="testfloor_1">測試1234樓</string>
-    <string name="scan_finished">送出</string>
     <string name="tstDev_name">測試用裝置9999型</string>
+    <string name="scan_loc">掃描地點</string>
+    <string name="scan_item">掃描設備</string>
 </resources>

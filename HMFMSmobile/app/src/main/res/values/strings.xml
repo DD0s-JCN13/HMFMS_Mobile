@@ -8,7 +8,7 @@
     <string name="refresh">refresh</string>
     <string name="home">Home</string>
     <string name="map">Map</string>
-    <string name="scanner">QR code scanner</string>
+    <string name="scanner">Equipment Scan</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -35,11 +35,11 @@
     <string name="cancel">Cancel</string>
     <string name="loc_name">Location Name</string>
     <string name="loc_floor">Floor of the location</string>
-    <string name="scan">Scan</string>
     <string name="testloc_1">Test Location 0001</string>
     <string name="testfloor_1">1234 Floor testing</string>
-    <string name="scan_finished">Send</string>
     <string name="tstDev_name">Test device type 9999</string>
+    <string name="scan_loc">Scan location</string>
+    <string name="scan_item">Scan item</string>
 
 
 </resources>

@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,9 +36,8 @@ public class ScannerActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private BottomNavigationView bottomNavigationView;
     private Toolbar toolbar;
-    private TextView locResult;
-    private TextView locFloor;
-    private Button btnScan;
+    private TextView locResult, locFloor;
+    private Button btnScanLoc;
     private Button btnConfirm;
     private RecyclerView recList;
     private boolean sysCondition = Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP;
@@ -64,8 +64,8 @@ public class ScannerActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar_scanner);
         navigationView = findViewById(R.id.nav_view_scanner);
         bottomNavigationView = findViewById(R.id.bottom_nav_scanner);
-        btnScan = findViewById(R.id.btn_scan);
-        btnConfirm = findViewById(R.id.btn_Confirm);
+        btnScanLoc = findViewById(R.id.btn_scan_Loc);
+        btnConfirm = findViewById(R.id.btn_scan_item);
         locResult = findViewById(R.id.loc_name);
         locFloor = findViewById(R.id.loc_floor);
         recList = findViewById(R.id.recView_item);
@@ -138,7 +138,7 @@ public class ScannerActivity extends AppCompatActivity {
     }
 
     protected void LocScanFuncSet(){
-        btnScan.setOnClickListener(new View.OnClickListener() {
+        btnScanLoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new IntentIntegrator(ScannerActivity.this)
@@ -166,7 +166,7 @@ public class ScannerActivity extends AppCompatActivity {
                     case "test0001":
                         locResult.setText(R.string.testloc_1);
                         locFloor.setText(R.string.testfloor_1);
-                        btnScan.setVisibility(View.INVISIBLE);
+                        btnScanLoc.setVisibility(View.INVISIBLE);
                         btnConfirm.setVisibility(View.VISIBLE);
                         recList.setVisibility(View.VISIBLE);
                         ItemCondition = "TEST";
@@ -202,7 +202,7 @@ public class ScannerActivity extends AppCompatActivity {
             }else if(ItemCondition.equals("TEST")){
                 Log.d("InfoListLength", String.valueOf(itemC.item.length));
                 Log.d("InfoGet1stOnList", String.valueOf(itemC.item[1].getTest()));
-                structure.itemID.setText("SEVICE-TEST-000"+String.valueOf(position));
+                structure.itemID.setText(itemC.item[position].getTest());
                 structure.itemType.setText(R.string.tstDev_name);
             }else {
                 structure.itemID.setText(itemC.item[position].getList());
@@ -223,12 +223,16 @@ public class ScannerActivity extends AppCompatActivity {
 
         class ItemStructure extends RecyclerView.ViewHolder{
             TextView itemID, itemType;
+            ImageView itemEmpty, itemChecked, itemWarn;
             public ItemStructure(View itemView){
                 super(itemView);
                 itemType = itemView.findViewById(R.id.item_type);
                 itemID = itemView.findViewById(R.id.item_propNum);
+                itemEmpty = itemView.findViewById(R.id.scan_item_empty);
+                itemChecked = itemView.findViewById(R.id.scan_item_checked);
+                itemWarn = itemView.findViewById(R.id.scan_item_warn);
             }
         }
-    }
 
+    }
 }
