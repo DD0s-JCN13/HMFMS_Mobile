@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import cathay.hospital.hmfmsmobile.util.ItemContainer;
 import cathay.hospital.hmfmsmobile.util.UtilTools;
-import cathay.hospital.hmfmsmobile.util.Items;
 
 import android.content.Intent;
 import android.os.Build;
@@ -37,14 +36,16 @@ public class ScannerActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private Toolbar toolbar;
     private TextView locResult, locFloor;
-    private Button btnScanLoc;
-    private Button btnConfirm;
+    private Button btnScanLoc, btnScanItem;
     private RecyclerView recList;
     private boolean sysCondition = Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP;
     public static ScannerActivity scannerActivity;
-    public static String ItemCondition="0";
-
-    ItemContainer itemC = new ItemContainer();
+    private int itemCounter = 0;
+    String ItemCondition="0";
+    String btnClicked = "";
+    String inputResult = "";
+    String[] CollectItems;
+    ItemContainer itemC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class ScannerActivity extends AppCompatActivity {
         setChecked();
         NavigationDrawerSet();
         BottomNavigationSet();
-        LocScanFuncSet();
+        ScanFuncSet();
     }
 
     protected void FindView(){
@@ -65,7 +66,7 @@ public class ScannerActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.nav_view_scanner);
         bottomNavigationView = findViewById(R.id.bottom_nav_scanner);
         btnScanLoc = findViewById(R.id.btn_scan_Loc);
-        btnConfirm = findViewById(R.id.btn_scan_item);
+        btnScanItem = findViewById(R.id.btn_scan_item);
         locResult = findViewById(R.id.loc_name);
         locFloor = findViewById(R.id.loc_floor);
         recList = findViewById(R.id.recView_item);
@@ -137,20 +138,35 @@ public class ScannerActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
-    protected void LocScanFuncSet(){
-        btnScanLoc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new IntentIntegrator(ScannerActivity.this)
-                        .setCaptureActivity(ScanningActivity.class)
-                        .setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)//掃條碼的類型
-                        .setPrompt("請對準條碼")//設置提醒標語
-                        .setCameraId(0)//選擇相機鏡頭，前置或是後置鏡頭
-                        .setBeepEnabled(false)//是否開啟聲音
-                        .setBarcodeImageEnabled(true)//掃描後會產生圖片
-                        .initiateScan();
-            }
+    protected void ScanFuncSet(){
+        //雖然兩者設置大致相同，但在點擊之後設下參數作為更新RecyclerView內容的依據
+        btnScanLoc.setOnClickListener(view -> {
+            btnClicked = "ScanLoc";
+            new IntentIntegrator(ScannerActivity.this)
+                    .setCaptureActivity(ScanningActivity.class)
+                    .setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)//掃條碼的類型
+                    .setPrompt("請對準條碼")//設置提醒標語
+                    .setCameraId(0)//選擇相機鏡頭，前置或是後置鏡頭
+                    .setBeepEnabled(false)//是否開啟聲音
+                    .setBarcodeImageEnabled(true)//掃描後會產生圖片
+                    .initiateScan();
         });
+        btnScanItem.setOnClickListener(view -> {
+            btnClicked = "ScanItem";
+            new IntentIntegrator(ScannerActivity.this)
+                    .setCaptureActivity(ScanningActivity.class)
+                    .setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)//掃條碼的類型
+                    .setPrompt("請對準條碼")//設置提醒標語
+                    .setCameraId(0)//選擇相機鏡頭，前置或是後置鏡頭
+                    .setBeepEnabled(false)//是否開啟聲音
+                    .setBarcodeImageEnabled(true)//掃描後會產生圖片
+                    .initiateScan();
+        });
+    }
+
+    protected void VisibleSet(){
+        btnScanItem.setVisibility(View.VISIBLE);
+        recList.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -161,19 +177,50 @@ public class ScannerActivity extends AppCompatActivity {
                 Toast.makeText(this,R.string.no_val,Toast.LENGTH_LONG).show();
             }else {
                 Log.d("InfoScan", String.valueOf(result));
-                String inputResult = result.getContents();
-                switch (inputResult){
-                    case "test0001":
-                        locResult.setText(R.string.testloc_1);
-                        locFloor.setText(R.string.testfloor_1);
-                        btnScanLoc.setVisibility(View.INVISIBLE);
-                        btnConfirm.setVisibility(View.VISIBLE);
-                        recList.setVisibility(View.VISIBLE);
-                        ItemCondition = "TEST";
-                        onCreateRecycleView();
-                    default:
-                        locResult.setText(result.getContents());
-                        onCreateRecycleView();
+                Log.d("InfoScan", result.getContents());
+                inputResult = result.getContents();
+                if(btnClicked.equals("ScanLoc")){
+                    VisibleSet();
+                    switch (inputResult){
+                        case "test0001":
+                            ItemContainer.recItemCount = 3;
+                            itemC = new ItemContainer();
+                            CollectItems = new String[3];
+                            for(int i=0; i<ItemContainer.recItemCount; i++){
+                                CollectItems[i] = itemC.item[i].getTest();
+                                Log.d("InfoCollectItem", CollectItems[i]);
+                            }
+                            locResult.setText(R.string.testloc_1);
+                            locFloor.setText(R.string.testfloor_1);
+                            ItemCondition = "TEST1";
+                            onCreateRecycleView();
+                            break;
+                        case "test0002":
+                            ItemContainer.recItemCount = 1;
+                            itemC = new ItemContainer();
+                            CollectItems = new String[1];
+                            CollectItems[0] = itemC.item[0].getAnotherTest();
+                            Log.d("InfoCollectItem", CollectItems[0]);
+                            locResult.setText(R.string.testloc_2);
+                            locFloor.setText(R.string.testfloor_1);
+                            ItemCondition = "TEST2";
+                            onCreateRecycleView();
+                            break;
+                        default:
+                            locResult.setText(result.getContents());
+                            onCreateRecycleView();
+                            break;
+                    }
+                }else if(btnClicked.equals("ScanItem")){
+                    for(int i=0;i<CollectItems.length;i++){
+                        if(inputResult.equals(CollectItems[i])){
+                            itemCounter = i;
+                            break;
+                        }
+                        if(i == CollectItems.length-1 && !inputResult.equals(CollectItems[i])){
+
+                        }
+                    }
                 }
             }
         }else {
@@ -181,7 +228,7 @@ public class ScannerActivity extends AppCompatActivity {
         }
     }
 
-    protected void onCreateRecycleView(){
+    public void onCreateRecycleView(){
         recList.setHasFixedSize(true);
         recList.setLayoutManager(new LinearLayoutManager(this));
         recList.setAdapter(new ItemAdapter());
@@ -195,29 +242,38 @@ public class ScannerActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull ItemStructure structure, int position) {
-            if(ItemCondition.equals("0")){
-                Log.d("InfoGet1stOnFake", String.valueOf(itemC.item[position].NoItems()));
-                structure.itemID.setText(itemC.item[0].NoItems());
-                structure.itemType.setText("");
-            }else if(ItemCondition.equals("TEST")){
-                Log.d("InfoListLength", String.valueOf(itemC.item.length));
-                Log.d("InfoGet1stOnList", String.valueOf(itemC.item[1].getTest()));
-                structure.itemID.setText(itemC.item[position].getTest());
-                structure.itemType.setText(R.string.tstDev_name);
-            }else {
-                structure.itemID.setText(itemC.item[position].getList());
-
+            switch (ItemCondition){
+                case "0":
+                    structure.itemID.setText(itemC.item[0].NoItems());
+                    structure.itemType.setText("");
+                    break;
+                case "TEST1":
+                    Log.d("InfoListLength", String.valueOf(itemC.item.length));
+                    Log.d("InfoGet1stOnList", itemC.item[0].getTest());
+                    structure.itemID.setText(itemC.item[position].getTest());
+                    structure.itemType.setText(R.string.tstDev_name);
+                    break;
+                case "TEST2":
+                    structure.itemID.setText(itemC.item[position].getAnotherTest());
+                    structure.itemType.setText(R.string.tstDev_name_2);
+                    break;
+                default:
+                    structure.itemID.setText(itemC.item[position].getList());
+                    break;
             }
         }
 
         @Override
         public int getItemCount() {
-            if(ItemCondition.equals("0")) {
-                return 0;
-            }else if(ItemCondition.equals("TEST")){
-                return 3;
-            }else{
-                return itemC.item.length;
+            switch (ItemCondition){
+                case "TEST1":
+                    return 3;
+                case "TEST2":
+                    return 1;
+                case "0":
+                default:
+                    //default function will not be the same as case 0
+                    return 0;
             }
         }
 
@@ -235,4 +291,9 @@ public class ScannerActivity extends AppCompatActivity {
         }
 
     }
+
+    protected void setVOnList(){
+
+    }
+
 }

@@ -40,6 +40,8 @@
     <string name="tstDev_name">Test device type 9999</string>
     <string name="scan_loc">Scan location</string>
     <string name="scan_item">Scan item</string>
+    <string name="testloc_2">Test Location 0002</string>
+    <string name="tstDev_name_2">Emergency water pipe 15m</string>
 
 
 </resources>

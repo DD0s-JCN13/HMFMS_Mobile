@@ -20,6 +20,10 @@ public class Items {
         return "DEVICE-TEST-0000"+number;
     }
 
+    public String getAnotherTest(){
+        return "F007-TEST-0000"+String.valueOf(number+1);
+    }
+
     public String getList(){
         return "SQL command here";
     }

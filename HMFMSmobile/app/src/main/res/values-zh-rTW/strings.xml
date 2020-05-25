@@ -41,4 +41,6 @@
     <string name="tstDev_name">測試用裝置9999型</string>
     <string name="scan_loc">掃描地點</string>
     <string name="scan_item">掃描設備</string>
+    <string name="testloc_2">測試地點0002</string>
+    <string name="tstDev_name_2">15公尺消防栓水線</string>
 </resources>
