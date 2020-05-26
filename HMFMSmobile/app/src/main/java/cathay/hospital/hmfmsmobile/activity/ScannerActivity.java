@@ -29,6 +29,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.util.ArrayList;
+
 public class ScannerActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
@@ -42,9 +44,9 @@ public class ScannerActivity extends AppCompatActivity {
     public static ScannerActivity scannerActivity;
     private int itemCounter = 0;
     String ItemCondition="0";
-    String btnClicked = "";
-    String inputResult = "";
-    String[] CollectItems;
+    String btnClicked = ""; //作為判斷使用者點擊的按鍵是掃描地點還是掃描財產編號
+    String inputResult = ""; //作為存放QR code掃描的結果內容
+    ArrayList CollectItems; //暫存現在所在位置的裝置財產編號，新的地點資料匯入就會覆蓋
     ItemContainer itemC;
 
     @Override
@@ -164,11 +166,6 @@ public class ScannerActivity extends AppCompatActivity {
         });
     }
 
-    protected void VisibleSet(){
-        btnScanItem.setVisibility(View.VISIBLE);
-        recList.setVisibility(View.VISIBLE);
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
@@ -180,15 +177,16 @@ public class ScannerActivity extends AppCompatActivity {
                 Log.d("InfoScan", result.getContents());
                 inputResult = result.getContents();
                 if(btnClicked.equals("ScanLoc")){
-                    VisibleSet();
+                    btnScanItem.setVisibility(View.VISIBLE);
+                    recList.setVisibility(View.VISIBLE);
                     switch (inputResult){
                         case "test0001":
                             ItemContainer.recItemCount = 3;
                             itemC = new ItemContainer();
-                            CollectItems = new String[3];
+                            CollectItems = new ArrayList();
                             for(int i=0; i<ItemContainer.recItemCount; i++){
-                                CollectItems[i] = itemC.item[i].getTest();
-                                Log.d("InfoCollectItem", CollectItems[i]);
+                                CollectItems.add(itemC.item[i].getTest());
+                                Log.d("InfoCollectItem", String.valueOf(CollectItems.get(i)));
                             }
                             locResult.setText(R.string.testloc_1);
                             locFloor.setText(R.string.testfloor_1);
@@ -198,9 +196,9 @@ public class ScannerActivity extends AppCompatActivity {
                         case "test0002":
                             ItemContainer.recItemCount = 1;
                             itemC = new ItemContainer();
-                            CollectItems = new String[1];
-                            CollectItems[0] = itemC.item[0].getAnotherTest();
-                            Log.d("InfoCollectItem", CollectItems[0]);
+                            CollectItems = new ArrayList();
+                            CollectItems.add(itemC.item[0].getAnotherTest());
+                            Log.d("InfoCollectItem", String.valueOf(CollectItems.get(0)));
                             locResult.setText(R.string.testloc_2);
                             locFloor.setText(R.string.testfloor_1);
                             ItemCondition = "TEST2";
@@ -212,12 +210,12 @@ public class ScannerActivity extends AppCompatActivity {
                             break;
                     }
                 }else if(btnClicked.equals("ScanItem")){
-                    for(int i=0;i<CollectItems.length;i++){
-                        if(inputResult.equals(CollectItems[i])){
+                    for(int i=0;i<CollectItems.size();i++){
+                        if(inputResult.equals(String.valueOf(CollectItems.get(i)))){
                             itemCounter = i;
                             break;
                         }
-                        if(i == CollectItems.length-1 && !inputResult.equals(CollectItems[i])){
+                        if(i == CollectItems.size()-1 && !inputResult.equals(String.valueOf(CollectItems.get(i)))){
 
                         }
                     }
