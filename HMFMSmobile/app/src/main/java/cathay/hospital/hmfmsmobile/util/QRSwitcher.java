@@ -41,6 +41,12 @@ public class QRSwitcher {
         }
     }
 
+    public static void OnItemScan(String result, int baseList, ArrayList itemCollector){
+        for(int i=0; i<baseList; i++){
+            if(itemCollector.indexOf(i).toString())
+        }
+    }
+
     public static void setLocCond(String result){
         //用於設定Location Scanner 掃描的結果
         switch (result){

@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import cathay.hospital.hmfmsmobile.util.ItemContainer;
-import cathay.hospital.hmfmsmobile.util.Items;
 import cathay.hospital.hmfmsmobile.util.QRSwitcher;
 import cathay.hospital.hmfmsmobile.util.UtilTools;
 
