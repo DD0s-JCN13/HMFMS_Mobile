@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import cathay.hospital.hmfmsmobile.util.ItemContainer;
+import cathay.hospital.hmfmsmobile.util.Items;
+import cathay.hospital.hmfmsmobile.util.QRSwitcher;
 import cathay.hospital.hmfmsmobile.util.UtilTools;
 
 import android.content.Intent;
@@ -37,13 +39,13 @@ public class ScannerActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private BottomNavigationView bottomNavigationView;
     private Toolbar toolbar;
-    private TextView locResult, locFloor;
     private Button btnScanLoc, btnScanItem;
+    private TextView locResult, locFloor;
     private RecyclerView recList;
+    private int itemCounter = 0;
     private boolean sysCondition = Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP;
     public static ScannerActivity scannerActivity;
-    private int itemCounter = 0;
-    String ItemCondition="0";
+    public static String ItemCondition="0";
     String btnClicked = ""; //作為判斷使用者點擊的按鍵是掃描地點還是掃描財產編號
     String inputResult = ""; //作為存放QR code掃描的結果內容
     ArrayList CollectItems; //暫存現在所在位置的裝置財產編號，新的地點資料匯入就會覆蓋
@@ -172,55 +174,18 @@ public class ScannerActivity extends AppCompatActivity {
         if(result!=null){
             if(result.getContents()==null){
                 Toast.makeText(this,R.string.no_val,Toast.LENGTH_LONG).show();
-            }else {
-                Log.d("InfoScan", String.valueOf(result));
-                Log.d("InfoScan", result.getContents());
-                inputResult = result.getContents();
-                if(btnClicked.equals("ScanLoc")){
-                    btnScanItem.setVisibility(View.VISIBLE);
-                    recList.setVisibility(View.VISIBLE);
-                    switch (inputResult){
-                        case "test0001":
-                            ItemContainer.recItemCount = 3;
-                            itemC = new ItemContainer();
-                            CollectItems = new ArrayList();
-                            for(int i=0; i<ItemContainer.recItemCount; i++){
-                                CollectItems.add(itemC.item[i].getTest());
-                                Log.d("InfoCollectItem", String.valueOf(CollectItems.get(i)));
-                            }
-                            locResult.setText(R.string.testloc_1);
-                            locFloor.setText(R.string.testfloor_1);
-                            ItemCondition = "TEST1";
-                            onCreateRecycleView();
-                            break;
-                        case "test0002":
-                            ItemContainer.recItemCount = 1;
-                            itemC = new ItemContainer();
-                            CollectItems = new ArrayList();
-                            CollectItems.add(itemC.item[0].getAnotherTest());
-                            Log.d("InfoCollectItem", String.valueOf(CollectItems.get(0)));
-                            locResult.setText(R.string.testloc_2);
-                            locFloor.setText(R.string.testfloor_1);
-                            ItemCondition = "TEST2";
-                            onCreateRecycleView();
-                            break;
-                        default:
-                            locResult.setText(result.getContents());
-                            onCreateRecycleView();
-                            break;
-                    }
-                }else if(btnClicked.equals("ScanItem")){
-                    for(int i=0;i<CollectItems.size();i++){
-                        if(inputResult.equals(String.valueOf(CollectItems.get(i)))){
-                            itemCounter = i;
-                            break;
-                        }
-                        if(i == CollectItems.size()-1 && !inputResult.equals(String.valueOf(CollectItems.get(i)))){
+            }else if(btnClicked.equals("ScanLoc")){
+                QRSwitcher.OnLocationScan(result.getContents(),
+                        itemCounter,itemC, CollectItems,locResult,locFloor);
+                QRSwitcher.setLocCond(result.getContents());
+                Log.d("InfoLocationItemCOUND", ItemCondition);
+                onCreateRecycleView();
+                recList.setVisibility(View.VISIBLE);
+                btnScanItem.setVisibility(View.VISIBLE);
+            }else if(btnClicked.equals("ScanItem")){
 
-                        }
-                    }
-                }
             }
+
         }else {
             super.onActivityResult(requestCode, resultCode, data);
         }
@@ -246,13 +211,13 @@ public class ScannerActivity extends AppCompatActivity {
                     structure.itemType.setText("");
                     break;
                 case "TEST1":
-                    Log.d("InfoListLength", String.valueOf(itemC.item.length));
-                    Log.d("InfoGet1stOnList", itemC.item[0].getTest());
+                    Log.d("InfoOnPosition", String.valueOf(position));
+                    Log.d("InfoGetPositionOnList", itemC.item[position].getTest());
                     structure.itemID.setText(itemC.item[position].getTest());
                     structure.itemType.setText(R.string.tstDev_name);
                     break;
                 case "TEST2":
-                    structure.itemID.setText(itemC.item[position].getAnotherTest());
+                    structure.itemID.setText(itemC.item[0].getAnotherTest());
                     structure.itemType.setText(R.string.tstDev_name_2);
                     break;
                 default:
@@ -288,9 +253,9 @@ public class ScannerActivity extends AppCompatActivity {
             }
         }
 
-    }
+        public void SetItemOnChecked(){
 
-    protected void setVOnList(){
+        }
 
     }
 

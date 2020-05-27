@@ -7,7 +7,7 @@ public class ItemContainer {
     public static int recItemCount = 0;
     public ItemContainer(){
         Log.d("InfoGetItemCount", String.valueOf(recItemCount));
-        item = new Items[recItemCount];
+        item = new Items[recItemCount*2];
         for(int i=0; i<recItemCount; i++){
             item[i] = new Items(i);
         }
