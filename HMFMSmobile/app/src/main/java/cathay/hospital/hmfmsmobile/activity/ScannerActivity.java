@@ -46,9 +46,8 @@ public class ScannerActivity extends AppCompatActivity {
     public static ScannerActivity scannerActivity;
     public static String ItemCondition="0";
     String btnClicked = ""; //作為判斷使用者點擊的按鍵是掃描地點還是掃描財產編號
-    String inputResult = ""; //作為存放QR code掃描的結果內容
     ArrayList CollectItems; //暫存現在所在位置的裝置財產編號，新的地點資料匯入就會覆蓋
-    ItemContainer itemC;
+    ItemContainer itemC;    //存放從資料庫撈出指定地點的所有設備產編與設備型號
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +56,6 @@ public class ScannerActivity extends AppCompatActivity {
         scannerActivity = this;
         FindView();
         ActionBarSet();
-        setChecked();
         NavigationDrawerSet();
         BottomNavigationSet();
         ScanFuncSet();
@@ -73,10 +71,6 @@ public class ScannerActivity extends AppCompatActivity {
         locResult = findViewById(R.id.loc_name);
         locFloor = findViewById(R.id.loc_floor);
         recList = findViewById(R.id.recView_item);
-    }
-
-    protected void setChecked(){
-        bottomNavigationView.getMenu().getItem(1).setChecked(true);
     }
 
     protected void ActionBarSet(){
@@ -135,6 +129,7 @@ public class ScannerActivity extends AppCompatActivity {
             }
             return false;
         });
+        bottomNavigationView.getMenu().getItem(1).setChecked(true);
     }
 
     protected void fadeSwitchAnimation(){
@@ -174,6 +169,7 @@ public class ScannerActivity extends AppCompatActivity {
             if(result.getContents()==null){
                 Toast.makeText(this,R.string.no_val,Toast.LENGTH_LONG).show();
             }else if(btnClicked.equals("ScanLoc")){
+                //透過Utiltools/QRSwitcher的方法來決定掃描QR code後的資料處理方式
                 QRSwitcher.OnLocationScan(result.getContents(),
                         itemCounter,itemC, CollectItems,locResult,locFloor);
                 QRSwitcher.setLocCond(result.getContents());
@@ -182,9 +178,8 @@ public class ScannerActivity extends AppCompatActivity {
                 recList.setVisibility(View.VISIBLE);
                 btnScanItem.setVisibility(View.VISIBLE);
             }else if(btnClicked.equals("ScanItem")){
-
+                //OnItemScan(result.getContents(),);
             }
-
         }else {
             super.onActivityResult(requestCode, resultCode, data);
         }

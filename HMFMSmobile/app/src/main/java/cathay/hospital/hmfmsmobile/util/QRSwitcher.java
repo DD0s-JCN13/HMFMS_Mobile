@@ -13,7 +13,13 @@ public class QRSwitcher {
     public static String condition = ScannerActivity.ItemCondition;
 
     public static void OnLocationScan(String result, int baseList, ItemContainer lister, ArrayList itemCollector, TextView location, TextView floor){
-        //這個方法僅供ScannerActivity 使用
+       /**  此方法僅供ScannerActivity 使用，屬性說明如下：
+         *  result          ->從QR code掃描的結果內容
+         *  baseList        ->作為生成在該地點的設備應有數量(也就是上次清點時的確定總數)
+         *  lister          ->存放設備資訊(地點、財產編號)的基本格式
+         *  itemCollection  ->存放該地點所有應有設備的"財產編號"
+         *  location, floor ->設定QR code對應的地點資訊(包含樓層與地點名稱)
+         */
         switch(result){
             case "test0001":
                 baseList = 3;
@@ -43,7 +49,10 @@ public class QRSwitcher {
 
     public static void OnItemScan(String result, int baseList, ArrayList itemCollector){
         for(int i=0; i<baseList; i++){
-            if(itemCollector.indexOf(i).toString())
+            if(itemCollector.get(i).toString().equals(result)){
+
+                break;
+            }
         }
     }
 
