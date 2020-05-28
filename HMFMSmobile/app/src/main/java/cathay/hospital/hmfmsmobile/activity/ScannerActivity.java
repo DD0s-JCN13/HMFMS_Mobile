@@ -32,6 +32,8 @@ import com.google.zxing.integration.android.IntentResult;
 
 import java.util.ArrayList;
 
+import static cathay.hospital.hmfmsmobile.util.QRSwitcher.OnItemScan;
+
 public class ScannerActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
@@ -41,12 +43,12 @@ public class ScannerActivity extends AppCompatActivity {
     private Button btnScanLoc, btnScanItem;
     private TextView locResult, locFloor;
     private RecyclerView recList;
-    private int itemCounter = 0;
     private boolean sysCondition = Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP;
+    public static int itemCounter = 0;
     public static ScannerActivity scannerActivity;
-    public static String ItemCondition="0";
+    public static String ItemCondition, scanResult="0";
+    public static ArrayList CollectItems; //暫存現在所在位置的裝置財產編號，新的地點資料匯入就會覆蓋
     String btnClicked = ""; //作為判斷使用者點擊的按鍵是掃描地點還是掃描財產編號
-    ArrayList CollectItems; //暫存現在所在位置的裝置財產編號，新的地點資料匯入就會覆蓋
     ItemContainer itemC;    //存放從資料庫撈出指定地點的所有設備產編與設備型號
 
     @Override
@@ -166,19 +168,20 @@ public class ScannerActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
         if(result!=null){
-            if(result.getContents()==null){
+            scanResult = result.getContents();
+            if(scanResult==null){
                 Toast.makeText(this,R.string.no_val,Toast.LENGTH_LONG).show();
             }else if(btnClicked.equals("ScanLoc")){
                 //透過Utiltools/QRSwitcher的方法來決定掃描QR code後的資料處理方式
-                QRSwitcher.OnLocationScan(result.getContents(),
-                        itemCounter,itemC, CollectItems,locResult,locFloor);
+                QRSwitcher.OnLocationScan(scanResult,locResult,locFloor);
                 QRSwitcher.setLocCond(result.getContents());
                 Log.d("InfoLocationItemCOUND", ItemCondition);
                 onCreateRecycleView();
                 recList.setVisibility(View.VISIBLE);
                 btnScanItem.setVisibility(View.VISIBLE);
             }else if(btnClicked.equals("ScanItem")){
-                //OnItemScan(result.getContents(),);
+                OnItemScan(scanResult);
+                //onCreateRecycleView();
             }
         }else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -205,9 +208,14 @@ public class ScannerActivity extends AppCompatActivity {
                     structure.itemType.setText("");
                     break;
                 case "TEST1":
-                    Log.d("InfoOnPosition", String.valueOf(position));
-                    Log.d("InfoGetPositionOnList", itemC.item[position].getTest());
-                    structure.itemID.setText(itemC.item[position].getTest());
+                    Log.d("InfoItemList", String.valueOf(itemC));
+                    //Log.d("InfoOnPosition", String.valueOf(position));
+                    //Log.d("InfoGetPositionOnList", itemC.item[position].getTest());
+                    if(position<itemCounter) {
+                        structure.itemID.setText(itemC.item[position].getTest());
+                    }else{
+                        structure.itemID.setText(itemC.item[position].getQRContent());
+                    }
                     structure.itemType.setText(R.string.tstDev_name);
                     break;
                 case "TEST2":
@@ -224,9 +232,8 @@ public class ScannerActivity extends AppCompatActivity {
         public int getItemCount() {
             switch (ItemCondition){
                 case "TEST1":
-                    return 3;
                 case "TEST2":
-                    return 1;
+                    return itemCounter;
                 case "0":
                 default:
                     //default function will not be the same as case 0

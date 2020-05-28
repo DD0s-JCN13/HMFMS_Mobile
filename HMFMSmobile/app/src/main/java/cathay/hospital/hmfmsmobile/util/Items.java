@@ -2,6 +2,8 @@ package cathay.hospital.hmfmsmobile.util;
 
 import android.util.Log;
 
+import cathay.hospital.hmfmsmobile.activity.ScannerActivity;
+
 
 public class Items {
 
@@ -26,5 +28,9 @@ public class Items {
 
     public String getList() {
         return "SQL command here";
+    }
+
+    public String getQRContent(){
+        return ScannerActivity.scanResult;
     }
 }
