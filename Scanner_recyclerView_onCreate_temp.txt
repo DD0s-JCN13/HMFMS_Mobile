@@ -1,0 +1,67 @@
+public void onCreateRecycleView(){
+        recList.setHasFixedSize(true);
+        recList.setLayoutManager(new LinearLayoutManager(this));
+        recList.setAdapter(new ItemAdapter());
+    }
+    
+class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemStructure>{
+        @NonNull
+        @Override
+        public ItemStructure onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new ItemStructure(getLayoutInflater().inflate(R.layout.item_role, parent, false));
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ItemStructure structure, int position) {
+            switch (ItemCondition){
+                case "0":
+                    structure.itemID.setText(itemC.item[0].NoItems());
+                    structure.itemType.setText("");
+                    break;
+                case "TEST1":
+                    Log.d("InfoItemList", String.valueOf(itemC));
+                    //Log.d("InfoOnPosition", String.valueOf(position));
+                    //Log.d("InfoGetPositionOnList", itemC.item[position].getTest());
+                    if(position<itemCounter) {
+                        structure.itemID.setText(itemC.item[position].getTest());
+                    }else{
+                        structure.itemID.setText(itemC.item[position].getQRContent());
+                    }
+                    structure.itemType.setText(R.string.tstDev_name);
+                    break;
+                case "TEST2":
+                    structure.itemID.setText(itemC.item[0].getAnotherTest());
+                    structure.itemType.setText(R.string.tstDev_name_2);
+                    break;
+                default:
+                    structure.itemID.setText(itemC.item[position].getList());
+                    break;
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            switch (ItemCondition){
+                case "TEST1":
+                case "TEST2":
+                    return itemCounter;
+                case "0":
+                default:
+                    //default function will not be the same as case 0
+                    return 0;
+            }
+        }
+
+        class ItemStructure extends RecyclerView.ViewHolder{
+            TextView itemID, itemType;
+            ImageView itemEmpty, itemChecked, itemWarn;
+            public ItemStructure(View itemView){
+                super(itemView);
+                itemType = itemView.findViewById(R.id.item_type);
+                itemID = itemView.findViewById(R.id.item_propNum);
+                itemEmpty = itemView.findViewById(R.id.scan_item_wait);
+                itemChecked = itemView.findViewById(R.id.scan_item_checked);
+                itemWarn = itemView.findViewById(R.id.scan_item_alert);
+            }
+        }
+    }

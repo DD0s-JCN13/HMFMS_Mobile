@@ -1,6 +1,5 @@
 package cathay.hospital.hmfmsmobile.activity;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,8 +9,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import cathay.hospital.hmfmsmobile.util.ItemContainer;
-import cathay.hospital.hmfmsmobile.util.QRSwitcher;
+import cathay.hospital.hmfmsmobile.util.CollectItems;
+import cathay.hospital.hmfmsmobile.util.ItemAdaptor;
 import cathay.hospital.hmfmsmobile.util.UtilTools;
 
 import android.content.Intent;
@@ -19,9 +18,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,8 +28,7 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import java.util.ArrayList;
-
-import static cathay.hospital.hmfmsmobile.util.QRSwitcher.OnItemScan;
+import java.util.List;
 
 public class ScannerActivity extends AppCompatActivity {
 
@@ -41,15 +37,19 @@ public class ScannerActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private Toolbar toolbar;
     private Button btnScanLoc, btnScanItem;
-    private TextView locResult, locFloor;
     private RecyclerView recList;
+    public static List<String> itemID, itemType, itemState = new ArrayList<>();
+    private CollectItems collectItems = new CollectItems();
+    private ItemAdaptor itemAdaptor;
     private boolean sysCondition = Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP;
     public static int itemCounter = 0;
     public static ScannerActivity scannerActivity;
-    public static String ItemCondition, scanResult="0";
-    public static ArrayList CollectItems; //暫存現在所在位置的裝置財產編號，新的地點資料匯入就會覆蓋
+    public static String device,scanResult="0";
+    public static TextView locResult, locFloor;
     String btnClicked = ""; //作為判斷使用者點擊的按鍵是掃描地點還是掃描財產編號
-    ItemContainer itemC;    //存放從資料庫撈出指定地點的所有設備產編與設備型號
+
+    public ScannerActivity() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,93 +171,43 @@ public class ScannerActivity extends AppCompatActivity {
             scanResult = result.getContents();
             if(scanResult==null){
                 Toast.makeText(this,R.string.no_val,Toast.LENGTH_LONG).show();
-            }else if(btnClicked.equals("ScanLoc")){
-                //透過Utiltools/QRSwitcher的方法來決定掃描QR code後的資料處理方式
-                QRSwitcher.OnLocationScan(scanResult,locResult,locFloor);
-                QRSwitcher.setLocCond(result.getContents());
-                Log.d("InfoLocationItemCOUND", ItemCondition);
-                onCreateRecycleView();
-                recList.setVisibility(View.VISIBLE);
-                btnScanItem.setVisibility(View.VISIBLE);
-            }else if(btnClicked.equals("ScanItem")){
-                OnItemScan(scanResult);
-                //onCreateRecycleView();
+            }else {
+                if(btnClicked.equals("ScanLoc")){
+                    getItemType(scanResult);
+                    Log.d("TST_get_type", device);
+                    collectItems.pushList(scanResult);
+                    Log.d("TST_get_size", String.valueOf(itemID.size()));
+                    Log.d("TST_get1st_item", itemID.get(0) +" "
+                            + itemType.get(0) +" " +itemState.get(0));
+                    btnScanItem.setVisibility(View.VISIBLE);
+                    recList.setVisibility(View.VISIBLE);
+                }else if(btnClicked.equals("ScanItem")){
+                    getItemType(scanResult);
+                    collectItems.updateList(scanResult);
+                    Log.d("TST_get_last_item", itemID.get(itemID.size()-1)+ " "
+                    +itemType.get(itemType.size()-1) + " " + itemState.get(itemState.size()-1));
+                }
+                recList.setLayoutManager(new LinearLayoutManager(this));
+                recList.setAdapter(itemAdaptor =
+                        new ItemAdaptor(this, itemID, itemType, itemState));
             }
         }else {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
-    public void onCreateRecycleView(){
-        recList.setHasFixedSize(true);
-        recList.setLayoutManager(new LinearLayoutManager(this));
-        recList.setAdapter(new ItemAdapter());
+    public void getItemType(String qrInput){
+        if(qrInput.equals("test0001") || qrInput.substring(4).equals("DEVI")){
+            device = getResources().getString(R.string.tstDev_name);
+        }else if(qrInput.equals("test0002") || qrInput.substring(4).equals("F007")){
+            device = getResources().getString(R.string.tstDev_name_2);
+            Log.d("TST_device2_name", getResources().getString(R.string.tstDev_name_2));
+        }
     }
-    class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemStructure>{
-        @NonNull
-        @Override
-        public ItemStructure onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new ItemStructure(getLayoutInflater().inflate(R.layout.item_role, parent, false));
-        }
 
-        @Override
-        public void onBindViewHolder(@NonNull ItemStructure structure, int position) {
-            switch (ItemCondition){
-                case "0":
-                    structure.itemID.setText(itemC.item[0].NoItems());
-                    structure.itemType.setText("");
-                    break;
-                case "TEST1":
-                    Log.d("InfoItemList", String.valueOf(itemC));
-                    //Log.d("InfoOnPosition", String.valueOf(position));
-                    //Log.d("InfoGetPositionOnList", itemC.item[position].getTest());
-                    if(position<itemCounter) {
-                        structure.itemID.setText(itemC.item[position].getTest());
-                    }else{
-                        structure.itemID.setText(itemC.item[position].getQRContent());
-                    }
-                    structure.itemType.setText(R.string.tstDev_name);
-                    break;
-                case "TEST2":
-                    structure.itemID.setText(itemC.item[0].getAnotherTest());
-                    structure.itemType.setText(R.string.tstDev_name_2);
-                    break;
-                default:
-                    structure.itemID.setText(itemC.item[position].getList());
-                    break;
-            }
-        }
-
-        @Override
-        public int getItemCount() {
-            switch (ItemCondition){
-                case "TEST1":
-                case "TEST2":
-                    return itemCounter;
-                case "0":
-                default:
-                    //default function will not be the same as case 0
-                    return 0;
-            }
-        }
-
-        class ItemStructure extends RecyclerView.ViewHolder{
-            TextView itemID, itemType;
-            ImageView itemEmpty, itemChecked, itemWarn;
-            public ItemStructure(View itemView){
-                super(itemView);
-                itemType = itemView.findViewById(R.id.item_type);
-                itemID = itemView.findViewById(R.id.item_propNum);
-                itemEmpty = itemView.findViewById(R.id.scan_item_empty);
-                itemChecked = itemView.findViewById(R.id.scan_item_checked);
-                itemWarn = itemView.findViewById(R.id.scan_item_warn);
-            }
-        }
-
-        public void SetItemOnChecked(){
-
-        }
-
+    public static String sendItemType(){
+        return device;
     }
+
 
 }
