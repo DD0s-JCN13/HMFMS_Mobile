@@ -38,11 +38,11 @@ public class ScannerActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private Button btnScanLoc, btnScanItem;
     private RecyclerView recList;
-    public static List<String> itemID, itemType, itemState = new ArrayList<>();
     private CollectItems collectItems = new CollectItems();
     private ItemAdaptor itemAdaptor;
     private boolean sysCondition = Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP;
-    public static int itemCounter = 0;
+    private String device_dynamic = "";
+    public static List<String> itemID, itemType, itemState = new ArrayList<>();
     public static ScannerActivity scannerActivity;
     public static String device,scanResult="0";
     public static TextView locResult, locFloor;
@@ -174,7 +174,7 @@ public class ScannerActivity extends AppCompatActivity {
             }else {
                 if(btnClicked.equals("ScanLoc")){
                     getItemType(scanResult);
-                    Log.d("TST_get_type", device);
+                    Log.d("TST_get_type", device_dynamic);
                     collectItems.pushList(scanResult);
                     Log.d("TST_get_size", String.valueOf(itemID.size()));
                     Log.d("TST_get1st_item", itemID.get(0) +" "
@@ -183,6 +183,7 @@ public class ScannerActivity extends AppCompatActivity {
                     recList.setVisibility(View.VISIBLE);
                 }else if(btnClicked.equals("ScanItem")){
                     getItemType(scanResult);
+                    Log.d("TST_get_Type", device_dynamic);
                     collectItems.updateList(scanResult);
                     Log.d("TST_get_last_item", itemID.get(itemID.size()-1)+ " "
                     +itemType.get(itemType.size()-1) + " " + itemState.get(itemState.size()-1));
@@ -197,12 +198,29 @@ public class ScannerActivity extends AppCompatActivity {
     }
 
     public void getItemType(String qrInput){
-        if(qrInput.equals("test0001") || qrInput.substring(4).equals("DEVI")){
-            device = getResources().getString(R.string.tstDev_name);
-        }else if(qrInput.equals("test0002") || qrInput.substring(4).equals("F007")){
-            device = getResources().getString(R.string.tstDev_name_2);
-            Log.d("TST_device2_name", getResources().getString(R.string.tstDev_name_2));
+        Log.d("TST_logic_click", String.valueOf(btnClicked.equals("ScanLoc")));
+        Log.d("TST_logic_click2", String.valueOf(btnClicked.equals("ScanItem")));
+        if(btnClicked.equals("ScanLoc")){
+            Log.d("TST_logic_location", String.valueOf(qrInput.equals("test0001")));
+            Log.d("TST_logic_location2", String.valueOf(qrInput.equals("test0002")));
+            if(qrInput.equals("test0001")){
+                device_dynamic = getResources().getString(R.string.tstDev_name);
+            }else if(qrInput.equals("test0002")){
+                device_dynamic = getResources().getString(R.string.tstDev_name_2);
+            }
+        }else if(btnClicked.equals("ScanItem")){
+            String decider = qrInput.substring(0,4);
+            Log.d("TST_get_decider", decider);
+            Log.d("TST_logic_items", String.valueOf(decider.equals("DEVI")));
+            Log.d("TST_logic_items2", String.valueOf(decider.equals("F007")));
+            if(decider.equals("DEVI")){
+                device_dynamic = getResources().getString(R.string.tstDev_name);
+            }else if(decider.equals("F007")){
+                device_dynamic = getResources().getString(R.string.tstDev_name_2);
+            }
         }
+        Log.d("TST_getItemType", device_dynamic);
+        device = device_dynamic;
     }
 
     public static String sendItemType(){

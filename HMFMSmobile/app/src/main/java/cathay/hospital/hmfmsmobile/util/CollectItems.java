@@ -11,7 +11,7 @@ import cathay.hospital.hmfmsmobile.activity.ScannerActivity;
 public class CollectItems {
     //用以產生存放物件產編、型號、掃描結果的類別，僅用於ScannerActivity
     private List<String> itemPNumLister, itemTpLister, itemSttLister;
-    public static String deviceName = "";
+    public String deviceName = "";
 
 
     public void pushList(String locScan){
@@ -46,6 +46,10 @@ public class CollectItems {
     }
 
     public void updateList(String itemNum){
+        deviceName = ScannerActivity.sendItemType();
+        itemPNumLister = new ArrayList<>(ScannerActivity.itemID);
+        itemTpLister = new ArrayList<>(ScannerActivity.itemType);
+        itemSttLister = new ArrayList<>(ScannerActivity.itemState);
         for(int i=0; i<itemPNumLister.size(); i++){
             if(itemNum.equals(itemPNumLister.get(i))){
                 itemSttLister.set(i, "pass");
@@ -54,7 +58,11 @@ public class CollectItems {
                 itemPNumLister.add(itemNum);
                 itemSttLister.add("alert");
                 itemTpLister.add(deviceName);
+                break;
             }
         }
+        ScannerActivity.itemID = new ArrayList<>(itemPNumLister);
+        ScannerActivity.itemType = new ArrayList<>(itemTpLister);
+        ScannerActivity.itemState = new ArrayList<>(itemSttLister);
     }
 }
